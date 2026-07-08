@@ -1,625 +1,469 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sin Apuestas — Cada día cuenta</title>
-<meta name="description" content="Deja de apostar. Cuenta tus días limpios, mira cuánto dinero has ahorrado y cumple tus metas.">
-<meta name="theme-color" content="#0B1220">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Sin Apuestas">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B1220'/%3E%3Cpath d='M50 16c-14 14-24 24-24 38a24 24 0 0 0 48 0c0-14-10-24-24-38z' fill='%2310B981'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SinApuestas — Recupera el control</title>
+<meta name="description" content="App gratuita y de código abierto para bloquear las casas de apuestas en tu celular y computadora. Sin VPN, difícil de desactivar. Una herramienta de apoyo para dejar de apostar.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2L4 5v6c0 5 3.4 9.4 8 10.7C16.6 20.4 20 16 20 11V5l-8-3z' fill='%230E7C6E'/%3E%3Cpath d='M8.5 12l2.3 2.3L15.8 9' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
 <style>
-  :root{
-    --bg:#0B1220; --bg2:#111B2E; --card:#16233B; --card2:#1C2C48;
-    --line:#24365A; --txt:#EAF1FB; --txt2:#8FA3C4; --txt3:#5D7196;
-    --verde:#10B981; --verde2:#34D399; --verdebg:rgba(16,185,129,.12);
-    --rojo:#F87171; --rojobg:rgba(248,113,113,.12);
-    --oro:#FBBF24; --orobg:rgba(251,191,36,.12);
-    --azul:#60A5FA;
-    --radius:20px;
+  :root {
+    --paper: #EEF2EF;
+    --paper-2: #E4EAE6;
+    --ink: #0C1B19;
+    --ink-soft: #16302C;
+    --muted: #5A6B66;
+    --line: #D3DCD8;
+    --teal: #0E7C6E;
+    --teal-deep: #0A5248;
+    --dawn: #E7A16A;
+    --dawn-deep: #C97C42;
+    --card: #FFFFFF;
+    --ring: rgba(14,124,110,.35);
+    --shadow: 0 1px 2px rgba(12,27,25,.05), 0 8px 30px rgba(12,27,25,.07);
+    --maxw: 1080px;
+    --serif: Georgia, "Times New Roman", serif;
+    --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
-  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html,body{height:100%}
-  body{
-    font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--txt);
-    font-size:16px;line-height:1.5;overscroll-behavior:none;
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0C1B19;
+      --paper-2: #0A1614;
+      --ink: #EAF1EE;
+      --ink-soft: #D3E0DB;
+      --muted: #90A39D;
+      --line: #1E332E;
+      --teal: #34B3A0;
+      --teal-deep: #7FD8C8;
+      --dawn: #F0B27E;
+      --dawn-deep: #E7A16A;
+      --card: #10201D;
+      --ring: rgba(52,179,160,.4);
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 34px rgba(0,0,0,.35);
+    }
   }
-  #root{max-width:520px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column}
 
-  /* ---------- genéricos ---------- */
-  .screen{flex:1;padding:24px 20px calc(96px + env(safe-area-inset-bottom));display:none}
-  .screen.activa{display:block;animation:fade .25s ease}
-  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:14px}
-  h1{font-size:24px;font-weight:800;letter-spacing:-.02em}
-  h2{font-size:17px;font-weight:700;margin-bottom:12px}
-  .sub{color:var(--txt2);font-size:14px}
-  .btn{
-    display:block;width:100%;padding:16px;border:none;border-radius:16px;cursor:pointer;
-    font-family:inherit;font-size:16px;font-weight:700;color:#06281C;background:var(--verde);
-    transition:transform .08s ease,filter .15s;
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink-soft);
+    font-family: var(--sans); font-size: 17px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
-  .btn:active{transform:scale(.97);filter:brightness(1.1)}
-  .btn.sec{background:var(--card2);color:var(--txt);border:1px solid var(--line)}
-  .btn.peligro{background:var(--rojobg);color:var(--rojo);border:1px solid rgba(248,113,113,.3)}
-  .btn.chico{width:auto;padding:10px 16px;font-size:14px;border-radius:12px;display:inline-block}
-  label{display:block;font-size:13px;font-weight:600;color:var(--txt2);margin:14px 0 6px}
-  input,textarea,select{
-    width:100%;padding:14px;border-radius:14px;border:1px solid var(--line);background:var(--bg2);
-    color:var(--txt);font-family:inherit;font-size:16px;outline:none;
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  h1, h2, h3 { color: var(--ink); font-family: var(--serif); font-weight: 600; text-wrap: balance; letter-spacing: -.01em; }
+  a { color: inherit; }
+  .eyebrow {
+    font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--teal);
   }
-  input:focus,textarea:focus{border-color:var(--verde)}
-  .fila{display:flex;gap:10px;align-items:center}
-  .fila>*{flex:1}
 
-  /* ---------- onboarding ---------- */
-  #onb{padding:40px 24px;display:none;flex-direction:column;justify-content:center;min-height:100dvh}
-  #onb.activa{display:flex;animation:fade .3s ease}
-  .logo-grande{font-size:56px;text-align:center;margin-bottom:8px}
-  .onb-titulo{text-align:center;font-size:30px;font-weight:900;letter-spacing:-.03em;margin-bottom:6px}
-  .onb-titulo em{color:var(--verde);font-style:normal}
-  .onb-sub{text-align:center;color:var(--txt2);margin-bottom:28px}
-
-  /* ---------- contador ---------- */
-  .hero{
-    background:linear-gradient(160deg,#0E3B2E 0%,#123528 45%,var(--card) 100%);
-    border:1px solid rgba(16,185,129,.35);border-radius:26px;padding:28px 20px;text-align:center;margin-bottom:14px;
+  /* Header */
+  header {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--paper) 86%, transparent);
+    backdrop-filter: saturate(1.2) blur(10px);
+    border-bottom: 1px solid var(--line);
   }
-  .hero .etiqueta{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--verde2)}
-  .dias-num{font-size:76px;font-weight:900;letter-spacing:-.04em;line-height:1.05;
-    background:linear-gradient(180deg,#fff, #A7F3D0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .dias-palabra{font-size:18px;font-weight:700;color:var(--verde2);margin-bottom:14px}
-  .reloj{display:flex;justify-content:center;gap:8px}
-  .reloj .u{background:rgba(0,0,0,.28);border-radius:12px;padding:8px 0;width:76px}
-  .reloj .n{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums}
-  .reloj .t{font-size:10px;color:var(--txt2);text-transform:uppercase;letter-spacing:.08em}
-
-  .stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-  .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
-  .stat .v{font-size:24px;font-weight:800;letter-spacing:-.02em}
-  .stat .k{font-size:12px;color:var(--txt2);margin-top:2px}
-  .stat.verde .v{color:var(--verde2)}
-  .stat.oro .v{color:var(--oro)}
-
-  .btn-sos{
-    background:linear-gradient(135deg,#F87171,#EF4444);color:#fff;font-size:17px;
-    box-shadow:0 8px 24px rgba(239,68,68,.25);margin-bottom:14px;
+  .bar { display: flex; align-items: center; gap: 16px; height: 62px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--ink); font-family: var(--sans); letter-spacing: -.01em; }
+  .brand svg { width: 26px; height: 26px; display: block; }
+  .spacer { flex: 1; }
+  .langs { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; background: var(--card); }
+  .langs button {
+    font: inherit; font-size: 13px; font-weight: 600; border: 0; background: transparent;
+    color: var(--muted); padding: 6px 12px; cursor: pointer;
   }
-  .hito-fila{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
-  .hito-fila:last-child{border-bottom:none}
-  .hito-ico{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--bg2);flex-shrink:0}
-  .hito-fila.logrado .hito-ico{background:var(--verdebg)}
-  .hito-fila.logrado .hito-nombre{color:var(--verde2)}
-  .hito-nombre{font-weight:600;font-size:14px;flex:1}
-  .hito-check{color:var(--verde);font-weight:800}
-  .hito-falta{color:var(--txt3);font-size:12px}
-  .barra{height:8px;background:var(--bg2);border-radius:99px;overflow:hidden;margin-top:10px}
-  .barra>div{height:100%;background:linear-gradient(90deg,var(--verde),var(--verde2));border-radius:99px;transition:width .4s ease}
+  .langs button[aria-pressed="true"] { background: var(--teal); color: #fff; }
+  .ghlink { font-size: 14px; font-weight: 600; color: var(--muted); text-decoration: none; white-space: nowrap; }
+  .ghlink:hover { color: var(--teal); }
 
-  /* ---------- metas ---------- */
-  .meta-item{padding:14px 0;border-bottom:1px solid var(--line)}
-  .meta-item:last-child{border-bottom:none}
-  .meta-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
-  .meta-nombre{font-weight:700}
-  .meta-monto{font-size:13px;color:var(--txt2);white-space:nowrap}
-  .meta-lista-vacia{color:var(--txt3);text-align:center;padding:20px 0;font-size:14px}
-  .x-btn{background:none;border:none;color:var(--txt3);font-size:18px;cursor:pointer;padding:4px 8px}
-
-  /* ---------- historial ---------- */
-  .rec-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:flex-start}
-  .rec-item:last-child{border-bottom:none}
-  .rec-fecha{font-size:12px;color:var(--txt2)}
-  .rec-monto{color:var(--rojo);font-weight:700;white-space:nowrap}
-  .rec-nota{font-size:13px;color:var(--txt2);margin-top:2px}
-
-  /* ---------- razones chips ---------- */
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-  .chip{background:var(--verdebg);color:var(--verde2);border:1px solid rgba(16,185,129,.3);
-    padding:7px 12px;border-radius:99px;font-size:13px;font-weight:600}
-  .chip .x-btn{font-size:14px;color:var(--verde2);padding:0 0 0 6px}
-
-  /* ---------- tabbar ---------- */
-  #tabbar{
-    position:fixed;bottom:0;left:0;right:0;z-index:50;display:none;
-    background:rgba(11,18,32,.92);backdrop-filter:blur(14px);border-top:1px solid var(--line);
+  /* Hero */
+  .hero { position: relative; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(120% 80% at 85% -10%, color-mix(in srgb, var(--dawn) 22%, transparent), transparent 55%),
+      radial-gradient(90% 70% at 10% 0%, color-mix(in srgb, var(--teal) 16%, transparent), transparent 60%);
+    pointer-events: none;
   }
-  #tabbar .inner{max-width:520px;margin:0 auto;display:flex;padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
-  .tab{
-    flex:1;background:none;border:none;color:var(--txt3);font-family:inherit;cursor:pointer;
-    display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10.5px;font-weight:600;padding:6px 0;border-radius:12px;
+  .hero .wrap { position: relative; padding: 72px 24px 64px; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; }
+  h1 { font-size: clamp(2.4rem, 5.4vw, 3.8rem); line-height: 1.04; margin: 16px 0 0; }
+  .lede { font-size: clamp(1.05rem, 2.2vw, 1.25rem); color: var(--ink-soft); margin: 20px 0 0; max-width: 34ch; }
+  .reassure { margin-top: 18px; color: var(--teal-deep); font-family: var(--serif); font-style: italic; font-size: 1.15rem; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; font: inherit; font-weight: 600;
+    padding: 13px 22px; border-radius: 12px; border: 1px solid transparent; cursor: pointer; text-decoration: none;
+    transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
   }
-  .tab .ico{font-size:21px;line-height:1}
-  .tab.activa{color:var(--verde2)}
+  .btn-primary { background: var(--teal); color: #fff; box-shadow: var(--shadow); }
+  .btn-primary:hover { transform: translateY(-1px); background: var(--teal-deep); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+  .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
+  .stats { display: flex; gap: 28px; margin-top: 40px; flex-wrap: wrap; }
+  .stat .n { font-family: var(--serif); font-size: 2rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .stat .l { font-size: 13px; color: var(--muted); letter-spacing: .02em; }
 
-  /* ---------- modales ---------- */
-  .velo{position:fixed;inset:0;background:rgba(4,8,16,.75);backdrop-filter:blur(6px);z-index:100;display:none;align-items:flex-end;justify-content:center}
-  .velo.abierta{display:flex;animation:fade .2s ease}
-  .hoja{background:var(--bg2);border:1px solid var(--line);border-bottom:none;border-radius:24px 24px 0 0;
-    width:100%;max-width:520px;padding:24px 20px calc(24px + env(safe-area-inset-bottom));max-height:88dvh;overflow-y:auto}
-  .hoja h2{font-size:20px}
+  /* Shield art */
+  .shield-art { display: grid; place-items: center; }
+  .shield-art svg { width: min(100%, 320px); height: auto; filter: drop-shadow(0 18px 40px rgba(12,27,25,.18)); }
 
-  /* ---------- SOS ---------- */
-  #sos .hoja{background:linear-gradient(180deg,#1A2338,#0B1220);text-align:center}
-  .resp-circulo{
-    width:150px;height:150px;border-radius:50%;margin:26px auto;
-    background:radial-gradient(circle,var(--verdebg),transparent 70%);
-    border:2px solid var(--verde);display:flex;align-items:center;justify-content:center;
-    font-weight:700;color:var(--verde2);font-size:15px;
-    animation:respirar 10s ease-in-out infinite;
-  }
-  @keyframes respirar{
-    0%{transform:scale(.72)} 40%{transform:scale(1.08)} 55%{transform:scale(1.08)} 100%{transform:scale(.72)}
-  }
-  .sos-razones{text-align:left;margin:18px 0}
-  .sos-razon{padding:10px 14px;background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:8px;font-size:14px;font-weight:600}
-  .sos-tips{text-align:left;color:var(--txt2);font-size:13px;margin:14px 0 20px}
-  .sos-tips li{margin:6px 0 6px 18px}
+  /* Sections */
+  section { padding: 68px 0; border-top: 1px solid var(--line); }
+  .section-head { max-width: 42ch; }
+  h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin: 10px 0 0; line-height: 1.12; }
+  .section-sub { color: var(--muted); margin-top: 14px; }
 
-  .toast{
-    position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:200;
-    background:var(--card2);border:1px solid var(--verde);color:var(--txt);
-    padding:12px 20px;border-radius:14px;font-weight:600;font-size:14px;
-    box-shadow:0 10px 30px rgba(0,0,0,.4);display:none;max-width:90%;text-align:center;
+  /* Lock steps */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+  .step {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 26px;
+    box-shadow: var(--shadow); position: relative;
   }
-  .peq{font-size:12px;color:var(--txt3);text-align:center;margin-top:8px}
+  .step .num {
+    font-family: var(--serif); font-size: 14px; font-weight: 700; color: var(--dawn-deep);
+    width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
+    border: 1.5px solid color-mix(in srgb, var(--dawn) 60%, var(--line)); font-variant-numeric: tabular-nums;
+  }
+  .step h3 { font-size: 1.2rem; margin: 16px 0 8px; }
+  .step p { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+  /* Platforms */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 28px;
+    box-shadow: var(--shadow); display: flex; flex-direction: column;
+  }
+  .card .ic { width: 42px; height: 42px; color: var(--teal); }
+  .card h3 { font-size: 1.35rem; margin: 16px 0 6px; }
+  .card .tag { font-size: 12.5px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--dawn-deep); }
+  .card p { color: var(--muted); font-size: 15.5px; flex: 1; }
+  .card .plat-cta { margin-top: 18px; font-weight: 600; color: var(--teal); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  .card .plat-cta:hover { gap: 10px; }
+
+  .worldwide {
+    margin-top: 28px; background: linear-gradient(120deg, color-mix(in srgb, var(--teal) 12%, var(--card)), var(--card));
+    border: 1px solid var(--line); border-radius: 16px; padding: 22px 26px; display: flex; gap: 16px; align-items: center;
+  }
+  .worldwide svg { width: 30px; height: 30px; color: var(--teal); flex: none; }
+  .worldwide p { margin: 0; font-size: 15.5px; }
+  .worldwide strong { color: var(--ink); }
+
+  /* Honesty */
+  .honesty {
+    background: var(--paper-2); border-radius: 20px; padding: 40px; border: 1px solid var(--line);
+  }
+  .honesty h2 { margin-top: 6px; }
+  .honesty ul { margin: 20px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; max-width: 62ch; }
+  .honesty li { padding-left: 28px; position: relative; color: var(--ink-soft); }
+  .honesty li::before { content: "→"; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+
+  /* Help */
+  .help-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 36px; }
+  .help {
+    border: 1px solid var(--line); border-radius: 16px; padding: 24px; background: var(--card);
+  }
+  .help h3 { font-size: 1.15rem; margin: 0 0 8px; }
+  .help p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--line); padding: 48px 0 60px; }
+  .foot { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+  .foot p { margin: 0; color: var(--muted); font-size: 14.5px; max-width: 52ch; }
+  .foot .btn { padding: 11px 18px; }
+
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .shield-art { order: -1; }
+    .shield-art svg { width: 190px; }
+    .steps, .cards, .help-grid { grid-template-columns: 1fr; }
+    .lede { max-width: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+  .reveal { opacity: 0; transform: translateY(14px); animation: rise .7s cubic-bezier(.2,.7,.3,1) forwards; }
+  .reveal.d1 { animation-delay: .08s; } .reveal.d2 { animation-delay: .16s; } .reveal.d3 { animation-delay: .24s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
 </style>
 </head>
 <body>
-<div id="root">
 
-  <!-- ============ ONBOARDING ============ -->
-  <div id="onb">
-    <div class="logo-grande">🍀</div>
-    <div class="onb-titulo">Sin <em>Apuestas</em></div>
-    <div class="onb-sub">Cada día sin apostar es dinero y vida que recuperas.</div>
-    <div class="card">
-      <label>¿Cuándo fue tu última apuesta?</label>
-      <input type="datetime-local" id="onb-fecha">
-      <label>¿Cuánto gastabas en apuestas por semana? (aprox.)</label>
-      <div class="fila">
-        <input type="number" id="onb-gasto" inputmode="decimal" min="0" placeholder="Ej: 100">
-        <select id="onb-moneda" style="max-width:110px">
-          <option value="$">$ USD</option><option value="€">€ EUR</option><option value="Q">Q GTQ</option>
-          <option value="L">L HNL</option><option value="C$">C$ NIO</option><option value="₡">₡ CRC</option>
-          <option value="S/">S/ PEN</option><option value="COL$">$ COP</option><option value="MX$">$ MXN</option>
-        </select>
+<header>
+  <div class="wrap bar">
+    <span class="brand">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2L4 5v6c0 5 3.4 9.4 8 10.7C16.6 20.4 20 16 20 11V5l-8-3z" fill="var(--teal)"/><path d="M8.5 12l2.3 2.3L15.8 9" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      SinApuestas
+    </span>
+    <span class="spacer"></span>
+    <div class="langs" role="group" aria-label="Idioma">
+      <button data-lang="es" aria-pressed="true">ES</button>
+      <button data-lang="en" aria-pressed="false">EN</button>
+      <button data-lang="pt" aria-pressed="false">PT</button>
+    </div>
+    <a class="ghlink" href="app.html" data-i18n="nav_app">Mi contador</a>
+    <a class="ghlink" href="https://github.com/jonathanguindi/sinapuestas" target="_blank" rel="noopener" data-i18n="nav_code">Código</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" style="border-top:0">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow reveal" data-i18n="hero_eyebrow">Gratis · Código abierto</p>
+          <h1 class="reveal d1" data-i18n="hero_title">Recupera el control. Bloquea las apuestas.</h1>
+          <p class="lede reveal d2" data-i18n="hero_lede">Una app que bloquea las casas de apuestas en tu celular y tu computadora. Sin VPN, y diseñada para ser muy difícil de desactivar en un impulso.</p>
+          <p class="reassure reveal d2" data-i18n="hero_reassure">No estás solo. El impulso pasa.</p>
+          <div class="cta-row reveal d3">
+            <a class="btn btn-primary" href="#dispositivos" data-i18n="hero_cta1">Elegir mi dispositivo</a>
+            <a class="btn btn-ghost" href="app.html" data-i18n="hero_cta_app">Mi contador de días</a>
+            <a class="btn btn-ghost" href="#ayuda" data-i18n="hero_cta2">Buscar ayuda</a>
+          </div>
+          <div class="stats reveal d3">
+            <div class="stat"><div class="n">244+</div><div class="l" data-i18n="stat1">casas bloqueadas</div></div>
+            <div class="stat"><div class="n">3</div><div class="l" data-i18n="stat2">plataformas</div></div>
+            <div class="stat"><div class="n">$0</div><div class="l" data-i18n="stat3">para siempre</div></div>
+          </div>
+        </div>
+        <div class="shield-art reveal d2" aria-hidden="true">
+          <svg viewBox="0 0 200 220" fill="none">
+            <defs>
+              <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--teal)"/><stop offset="1" stop-color="var(--teal-deep)"/>
+              </linearGradient>
+            </defs>
+            <path d="M100 8L20 34v58c0 52 34 92 80 112 46-20 80-60 80-112V34L100 8z" fill="url(#g)"/>
+            <path d="M100 22L33 44v48c0 44 28 78 67 95 39-17 67-51 67-95V44L100 22z" fill="none" stroke="var(--dawn)" stroke-width="2" opacity=".5"/>
+            <path d="M66 108l24 24 46-52" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
       </div>
-      <label>¿Por qué quieres dejarlo? (puedes agregar varias)</label>
-      <div class="fila">
-        <input type="text" id="onb-razon" placeholder="Ej: mi familia, salir de deudas…">
-        <button class="btn sec chico" style="flex:0 0 auto" onclick="onbAgregarRazon()">＋</button>
-      </div>
-      <div class="chips" id="onb-chips"></div>
     </div>
-    <button class="btn" onclick="empezar()">Empezar mi cuenta 🚀</button>
-    <div class="peq">Tus datos se guardan solo en tu teléfono.</div>
-  </div>
+  </section>
 
-  <!-- ============ INICIO ============ -->
-  <div id="scr-inicio" class="screen">
-    <div class="hero">
-      <div class="etiqueta">Sin apostar llevas</div>
-      <div class="dias-num" id="dias-num">0</div>
-      <div class="dias-palabra" id="dias-palabra">días</div>
-      <div class="reloj">
-        <div class="u"><div class="n" id="rl-h">00</div><div class="t">horas</div></div>
-        <div class="u"><div class="n" id="rl-m">00</div><div class="t">min</div></div>
-        <div class="u"><div class="n" id="rl-s">00</div><div class="t">seg</div></div>
+  <section id="candado">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="lock_eyebrow">El candado</p>
+        <h2 data-i18n="lock_title">Te respeta cuando estás fuerte y te protege cuando estás débil.</h2>
+        <p class="section-sub" data-i18n="lock_sub">La clave es la fricción: para desactivar el bloqueo hace falta una contraseña y que pase un tiempo que tú mismo elegiste.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="num">1</div><h3 data-i18n="step1_t">Una contraseña de custodio</h3><p data-i18n="step1_p">Idealmente la escribe otra persona de confianza y no te la dice. Así no puedes quitar el bloqueo solo.</p></div>
+        <div class="step"><div class="num">2</div><h3 data-i18n="step2_t">Un período de compromiso</h3><p data-i18n="step2_p">Eliges 7, 30, 90 días o un año. Ese tiempo es tu promesa contigo mismo.</p></div>
+        <div class="step"><div class="num">3</div><h3 data-i18n="step3_t">No se puede acortar</h3><p data-i18n="step3_p">Durante el compromiso, ni con la contraseña se puede desactivar. El impulso choca con una pared.</p></div>
       </div>
     </div>
+  </section>
 
-    <button class="btn btn-sos" onclick="abrirSOS()">🆘 Tengo ganas de apostar</button>
-
-    <div class="stats">
-      <div class="stat verde"><div class="v" id="st-ahorro">$0</div><div class="k">ahorrado esta racha</div></div>
-      <div class="stat oro"><div class="v" id="st-record">0 días</div><div class="k">tu mejor racha</div></div>
-    </div>
-
-    <div class="card">
-      <h2>🏅 Próximo logro</h2>
-      <div id="hito-proximo"></div>
-      <div class="barra"><div id="hito-barra" style="width:0%"></div></div>
-      <div style="margin-top:16px" id="hitos-lista"></div>
-    </div>
-
-    <div class="card" id="card-razones" style="display:none">
-      <h2>💚 Lo haces por…</h2>
-      <div class="chips" id="inicio-razones"></div>
-    </div>
-  </div>
-
-  <!-- ============ METAS ============ -->
-  <div id="scr-metas" class="screen">
-    <h1>Metas 🎯</h1>
-    <p class="sub" style="margin-bottom:16px">¿Qué vas a hacer con el dinero que ya no pierdes?</p>
-    <div class="card">
-      <div id="metas-lista"><div class="meta-lista-vacia">Aún no tienes metas. Agrega la primera 👇</div></div>
-    </div>
-    <div class="card">
-      <h2>Nueva meta</h2>
-      <label>¿Qué quieres lograr o comprar?</label>
-      <input type="text" id="meta-nombre" placeholder="Ej: pagar deuda, viaje, bici…">
-      <label>¿Cuánto cuesta?</label>
-      <input type="number" id="meta-costo" inputmode="decimal" min="1" placeholder="Ej: 500">
-      <div style="height:14px"></div>
-      <button class="btn" onclick="agregarMeta()">Agregar meta</button>
-    </div>
-  </div>
-
-  <!-- ============ HISTORIAL ============ -->
-  <div id="scr-historial" class="screen">
-    <h1>Historial 📖</h1>
-    <p class="sub" style="margin-bottom:16px">Las recaídas no borran tu progreso: son parte del camino.</p>
-    <div class="stats">
-      <div class="stat"><div class="v" id="h-recaidas">0</div><div class="k">recaídas registradas</div></div>
-      <div class="stat"><div class="v" id="h-perdido" style="color:var(--rojo)">$0</div><div class="k">perdido en recaídas</div></div>
-    </div>
-    <div class="card">
-      <h2>Recaídas</h2>
-      <div id="rec-lista"><div class="meta-lista-vacia">Ninguna. ¡Sigue así! 💪</div></div>
-    </div>
-  </div>
-
-  <!-- ============ AJUSTES ============ -->
-  <div id="scr-ajustes" class="screen">
-    <h1>Ajustes ⚙️</h1>
-    <div style="height:12px"></div>
-    <div class="card">
-      <h2>Mi información</h2>
-      <label>Gasto semanal en apuestas (antes de dejar)</label>
-      <div class="fila">
-        <input type="number" id="aj-gasto" inputmode="decimal" min="0">
-        <select id="aj-moneda" style="max-width:110px">
-          <option value="$">$ USD</option><option value="€">€ EUR</option><option value="Q">Q GTQ</option>
-          <option value="L">L HNL</option><option value="C$">C$ NIO</option><option value="₡">₡ CRC</option>
-          <option value="S/">S/ PEN</option><option value="COL$">$ COP</option><option value="MX$">$ MXN</option>
-        </select>
+  <section id="dispositivos">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="dev_eyebrow">En todos tus dispositivos</p>
+        <h2 data-i18n="dev_title">Elige el tuyo. Los tres sin VPN.</h2>
       </div>
-      <label>Fecha de mi última apuesta</label>
-      <input type="datetime-local" id="aj-fecha">
-      <div style="height:14px"></div>
-      <button class="btn" onclick="guardarAjustes()">Guardar cambios</button>
-    </div>
-    <div class="card">
-      <h2>Mis razones</h2>
-      <div class="fila">
-        <input type="text" id="aj-razon" placeholder="Agregar razón…">
-        <button class="btn sec chico" style="flex:0 0 auto" onclick="ajAgregarRazon()">＋</button>
+      <div class="cards">
+        <div class="card">
+          <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h10a2 2 0 012 2v16a2 2 0 01-2 2H7a2 2 0 01-2-2V4a2 2 0 012-2zm5 18a1 1 0 100-2 1 1 0 000 2zM8 4v13h8V4H8z"/></svg>
+          <span class="tag">Android</span>
+          <h3 data-i18n="and_t">Bloqueo profundo</h3>
+          <p data-i18n="and_p">Se integra al sistema con Accesibilidad y Administrador de dispositivo. Bloquea apps y webs de apuestas y se defiende de que la desinstalen sin la contraseña.</p>
+          <a class="plat-cta" href="https://github.com/jonathanguindi/sinapuestas/tree/main/android" target="_blank" rel="noopener" data-i18n="and_cta">Instalar en Android →</a>
+        </div>
+        <div class="card">
+          <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.9c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.8-3-.8-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .7 1.1 1.6 2.3 2.7 2.2 1.1 0 1.5-.7 2.8-.7 1.3 0 1.6.7 2.8.7 1.2 0 1.9-1.1 2.6-2.1.8-1.2 1.2-2.3 1.2-2.4-.1 0-2.3-.9-2.3-3.5zM14.2 5.9c.6-.7 1-1.8.9-2.9-.9 0-2 .6-2.6 1.4-.6.6-1 1.7-.9 2.7 1 .1 2-.5 2.6-1.2z"/></svg>
+          <span class="tag">iPhone · iPad</span>
+          <h3 data-i18n="ios_t">Con Screen Time de Apple</h3>
+          <p data-i18n="ios_p">Un perfil filtra los sitios de apuestas en todo el sistema y una app usa Tiempo en Pantalla. Con el código en manos de otra persona, muy difícil de saltar.</p>
+          <a class="plat-cta" href="https://github.com/jonathanguindi/sinapuestas/tree/main/apple" target="_blank" rel="noopener" data-i18n="ios_cta">Instalar en iPhone →</a>
+        </div>
+        <div class="card">
+          <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 4h18a1 1 0 011 1v11a1 1 0 01-1 1h-7v2h3v2H6v-2h3v-2H3a1 1 0 01-1-1V5a1 1 0 011-1zm1 2v9h16V6H4z"/></svg>
+          <span class="tag">Windows · Mac · Linux</span>
+          <h3 data-i18n="pc_t">También en la compu</h3>
+          <p data-i18n="pc_p">Bloquea los sitios con un vigilante que se repara solo si alguien lo toca. Arranca con el sistema y pide la contraseña para detenerse.</p>
+          <a class="plat-cta" href="https://github.com/jonathanguindi/sinapuestas/tree/main/desktop" target="_blank" rel="noopener" data-i18n="pc_cta">Instalar en la compu →</a>
+        </div>
       </div>
-      <div class="chips" id="aj-chips"></div>
+      <div class="worldwide">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.8 3.8 9S14.5 18.5 12 21c-2.5-2.5-3.8-5.8-3.8-9S9.5 5.5 12 3z" stroke="currentColor" stroke-width="1.8"/></svg>
+        <p data-i18n="world_p"><strong>Bloqueo mundial.</strong> Cientos de casas de apuestas de todos los continentes, más una capa de palabras clave (casino, apuesta, poker, ruleta…) que atrapa también las nuevas y las que no están en la lista.</p>
+      </div>
     </div>
-    <div class="card">
-      <h2>Zona de peligro</h2>
-      <button class="btn peligro" onclick="borrarTodo()">Borrar todos mis datos</button>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="honesty">
+        <p class="eyebrow" data-i18n="honesty_eyebrow">Sin humo</p>
+        <h2 data-i18n="honesty_title">Lo que sí hace, y lo que no.</h2>
+        <ul>
+          <li data-i18n="honesty1">Ninguna app puede cerrar tus cuentas de apuestas: eso se hace con la autoexclusión, directo con el operador.</li>
+          <li data-i18n="honesty2">Sin rootear o hacer jailbreak, nada es 100% imposible de quitar para alguien con tiempo y permisos.</li>
+          <li data-i18n="honesty3">Lo que logra es suficiente fricción para frenar el impulso, sobre todo si la contraseña la guarda alguien de confianza.</li>
+          <li data-i18n="honesty4">Es de código abierto: cualquiera puede revisar que no hay trampa ni espía nada.</li>
+        </ul>
+      </div>
     </div>
-    <div class="peq">Sin Apuestas v1.0 — hecho con 💚</div>
+  </section>
+
+  <section id="ayuda">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="help_eyebrow">No estás solo</p>
+        <h2 data-i18n="help_title">Si las apuestas te están haciendo daño</h2>
+        <p class="section-sub" data-i18n="help_sub">Esta herramienta es un apoyo, no un tratamiento. Combínala con ayuda real.</p>
+      </div>
+      <div class="help-grid">
+        <div class="help"><h3 data-i18n="help1_t">Autoexclusión</h3><p data-i18n="help1_p">Pide por escrito el cierre de tu cuenta en cada casa de apuestas donde juegues.</p></div>
+        <div class="help"><h3 data-i18n="help2_t">Bloquea los pagos</h3><p data-i18n="help2_p">Muchos bancos bloquean las transacciones de juego (código MCC 7995). Pregunta en el tuyo.</p></div>
+        <div class="help"><h3 data-i18n="help3_t">Habla con alguien</h3><p data-i18n="help3_p">Jugadores Anónimos tiene grupos gratuitos en toda América Latina: jugadoresanonimos.org</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p data-i18n="foot_p">Hecho para ayudar a la humanidad a dejar de apostar. Código abierto (licencia MIT): úsalo, cámbialo y compártelo con quien lo necesite. 💙</p>
+    <button class="btn btn-primary" id="shareBtn" data-i18n="foot_share">Compartir esto</button>
   </div>
-
-  <!-- ============ TABBAR ============ -->
-  <nav id="tabbar"><div class="inner">
-    <button class="tab activa" data-scr="inicio" onclick="irA('inicio')"><span class="ico">🍀</span>Inicio</button>
-    <button class="tab" data-scr="metas" onclick="irA('metas')"><span class="ico">🎯</span>Metas</button>
-    <button class="tab" data-scr="historial" onclick="irA('historial')"><span class="ico">📖</span>Historial</button>
-    <button class="tab" data-scr="ajustes" onclick="irA('ajustes')"><span class="ico">⚙️</span>Ajustes</button>
-  </div></nav>
-
-  <!-- ============ MODAL SOS ============ -->
-  <div class="velo" id="sos">
-    <div class="hoja">
-      <h2>Respira. Esto va a pasar. 💚</h2>
-      <p class="sub" style="margin-top:6px">Las ganas de apostar duran unos minutos y se van. Respira con el círculo.</p>
-      <div class="resp-circulo">inhala… exhala</div>
-      <div class="sos-razones" id="sos-razones"></div>
-      <ul class="sos-tips">
-        <li>Espera 10 minutos antes de decidir nada: la urgencia baja sola.</li>
-        <li>Llama o escríbele a alguien de confianza ahora mismo.</li>
-        <li>Sal a caminar o cambia de lugar: aleja el teléfono del bolsillo.</li>
-        <li>Recuerda: la casa siempre gana. Tu dinero ya está trabajando para ti.</li>
-      </ul>
-      <button class="btn" onclick="superado()">Ya pasó, sigo firme 💪</button>
-      <div style="height:10px"></div>
-      <button class="btn sec" onclick="cerrarSOS();abrirRecaida()">Aposté… quiero registrarlo</button>
-    </div>
-  </div>
-
-  <!-- ============ MODAL RECAÍDA ============ -->
-  <div class="velo" id="recaida">
-    <div class="hoja">
-      <h2>Registrar recaída</h2>
-      <p class="sub" style="margin-top:6px">Sin culpa. Lo importante es volver a empezar hoy mismo.</p>
-      <label>¿Cuánto apostaste?</label>
-      <input type="number" id="rec-monto" inputmode="decimal" min="0" placeholder="Ej: 50">
-      <label>¿Qué pasó? (opcional)</label>
-      <textarea id="rec-nota" rows="2" placeholder="Dónde estabas, qué sentías…"></textarea>
-      <div style="height:16px"></div>
-      <button class="btn" onclick="confirmarRecaida()">Guardar y reiniciar contador</button>
-      <div style="height:10px"></div>
-      <button class="btn sec" onclick="cerrar('recaida')">Cancelar</button>
-    </div>
-  </div>
-
-  <div class="toast" id="toast"></div>
-</div>
+</footer>
 
 <script>
-"use strict";
-/* ================= estado ================= */
-const CLAVE = "sinapuestas_v1";
-const HITOS = [
-  {d:1,   n:"1 día limpio",      e:"🌱"},
-  {d:3,   n:"3 días",            e:"🔥"},
-  {d:7,   n:"1 semana",          e:"⭐"},
-  {d:14,  n:"2 semanas",         e:"🚀"},
-  {d:30,  n:"1 mes",             e:"🏆"},
-  {d:60,  n:"2 meses",           e:"💎"},
-  {d:90,  n:"3 meses",           e:"👑"},
-  {d:180, n:"6 meses",           e:"🦁"},
-  {d:365, n:"1 año sin apostar", e:"🌟"},
-];
-let S = null;          // estado global de la app
-let hitosAvisados = new Set();
-
-function cargar(){
-  try{ S = JSON.parse(localStorage.getItem(CLAVE)); }catch(e){ S = null; }
-}
-function guardar(){ localStorage.setItem(CLAVE, JSON.stringify(S)); }
-
-/* ================= utilidades ================= */
-const $ = id => document.getElementById(id);
-const pad = n => String(n).padStart(2,"0");
-function esc(s){ return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
-function dinero(v){
-  const m = (S && S.moneda) || "$";
-  return m + v.toLocaleString("es", {maximumFractionDigits: v < 100 ? 2 : 0});
-}
-function msRacha(){ return Math.max(0, Date.now() - new Date(S.inicio).getTime()); }
-function ahorro(ms){ return (S.gastoSemanal || 0) / (7*86400000) * ms; }
-function fechaLocalInput(d){
-  const x = new Date(d); x.setMinutes(x.getMinutes() - x.getTimezoneOffset());
-  return x.toISOString().slice(0,16);
-}
-function toast(msg){
-  const t = $("toast"); t.textContent = msg; t.style.display = "block";
-  clearTimeout(t._tm); t._tm = setTimeout(()=> t.style.display = "none", 3200);
-}
-
-/* ================= onboarding ================= */
-let onbRazones = [];
-function pintarOnbChips(){
-  $("onb-chips").innerHTML = onbRazones.map((r,i)=>
-    `<span class="chip">${esc(r)}<button class="x-btn" onclick="quitarOnbRazon(${i})">✕</button></span>`).join("");
-}
-function onbAgregarRazon(){
-  const inp = $("onb-razon"), v = inp.value.trim();
-  if(!v) return;
-  onbRazones.push(v); inp.value = "";
-  pintarOnbChips();
-}
-function quitarOnbRazon(i){ onbRazones.splice(i,1); pintarOnbChips(); }
-function empezar(){
-  const fecha = $("onb-fecha").value || fechaLocalInput(new Date());
-  const gasto = parseFloat($("onb-gasto").value) || 0;
-  S = {
-    inicio: new Date(fecha).toISOString(),
-    gastoSemanal: gasto,
-    moneda: $("onb-moneda").value,
-    razones: onbRazones.slice(),
-    recaidas: [],
-    metas: [],
-    recordMs: 0,
-    ahorroPrevio: 0,
-    creado: new Date().toISOString(),
-  };
-  guardar();
-  montarApp();
-  toast("¡Empezamos! Cada segundo ya cuenta 💚");
-}
-
-/* ================= navegación ================= */
-function irA(nombre){
-  document.querySelectorAll(".screen").forEach(s => s.classList.remove("activa"));
-  $("scr-"+nombre).classList.add("activa");
-  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("activa", t.dataset.scr === nombre));
-  if(nombre === "metas") pintarMetas();
-  if(nombre === "historial") pintarHistorial();
-  if(nombre === "ajustes") pintarAjustes();
-  window.scrollTo(0,0);
-}
-
-/* ================= inicio / contador ================= */
-function tick(){
-  if(!S) return;
-  const ms = msRacha();
-  const dias = Math.floor(ms/86400000);
-  $("dias-num").textContent = dias;
-  $("dias-palabra").textContent = dias === 1 ? "día" : "días";
-  $("rl-h").textContent = pad(Math.floor(ms/3600000) % 24);
-  $("rl-m").textContent = pad(Math.floor(ms/60000) % 60);
-  $("rl-s").textContent = pad(Math.floor(ms/1000) % 60);
-  $("st-ahorro").textContent = dinero(ahorro(ms));
-  const recDias = Math.floor(Math.max(S.recordMs, ms)/86400000);
-  $("st-record").textContent = recDias + (recDias===1?" día":" días");
-  pintarHitos(ms);
-  for(const hito of HITOS){
-    if(ms >= hito.d*86400000 && !hitosAvisados.has(hito.d)){
-      hitosAvisados.add(hito.d);
-      if(ms - hito.d*86400000 < 2000) toast(`${hito.e} ¡Lograste ${hito.n}!`);
+  const I18N = {
+    es: {
+      nav_code: "Código",
+      nav_app: "Mi contador",
+      hero_eyebrow: "Gratis · Código abierto",
+      hero_title: "Recupera el control. Bloquea las apuestas.",
+      hero_lede: "Una app que bloquea las casas de apuestas en tu celular y tu computadora. Sin VPN, y diseñada para ser muy difícil de desactivar en un impulso.",
+      hero_reassure: "No estás solo. El impulso pasa.",
+      hero_cta1: "Elegir mi dispositivo", hero_cta2: "Buscar ayuda", hero_cta_app: "Mi contador de días",
+      stat1: "casas bloqueadas", stat2: "plataformas", stat3: "para siempre",
+      lock_eyebrow: "El candado",
+      lock_title: "Te respeta cuando estás fuerte y te protege cuando estás débil.",
+      lock_sub: "La clave es la fricción: para desactivar el bloqueo hace falta una contraseña y que pase un tiempo que tú mismo elegiste.",
+      step1_t: "Una contraseña de custodio", step1_p: "Idealmente la escribe otra persona de confianza y no te la dice. Así no puedes quitar el bloqueo solo.",
+      step2_t: "Un período de compromiso", step2_p: "Eliges 7, 30, 90 días o un año. Ese tiempo es tu promesa contigo mismo.",
+      step3_t: "No se puede acortar", step3_p: "Durante el compromiso, ni con la contraseña se puede desactivar. El impulso choca con una pared.",
+      dev_eyebrow: "En todos tus dispositivos", dev_title: "Elige el tuyo. Los tres sin VPN.",
+      and_t: "Bloqueo profundo", and_p: "Se integra al sistema con Accesibilidad y Administrador de dispositivo. Bloquea apps y webs de apuestas y se defiende de que la desinstalen sin la contraseña.", and_cta: "Instalar en Android →",
+      ios_t: "Con Screen Time de Apple", ios_p: "Un perfil filtra los sitios de apuestas en todo el sistema y una app usa Tiempo en Pantalla. Con el código en manos de otra persona, muy difícil de saltar.", ios_cta: "Instalar en iPhone →",
+      pc_t: "También en la compu", pc_p: "Bloquea los sitios con un vigilante que se repara solo si alguien lo toca. Arranca con el sistema y pide la contraseña para detenerse.", pc_cta: "Instalar en la compu →",
+      world_p: "<strong>Bloqueo mundial.</strong> Cientos de casas de apuestas de todos los continentes, más una capa de palabras clave (casino, apuesta, poker, ruleta…) que atrapa también las nuevas y las que no están en la lista.",
+      honesty_eyebrow: "Sin humo", honesty_title: "Lo que sí hace, y lo que no.",
+      honesty1: "Ninguna app puede cerrar tus cuentas de apuestas: eso se hace con la autoexclusión, directo con el operador.",
+      honesty2: "Sin rootear o hacer jailbreak, nada es 100% imposible de quitar para alguien con tiempo y permisos.",
+      honesty3: "Lo que logra es suficiente fricción para frenar el impulso, sobre todo si la contraseña la guarda alguien de confianza.",
+      honesty4: "Es de código abierto: cualquiera puede revisar que no hay trampa ni espía nada.",
+      help_eyebrow: "No estás solo", help_title: "Si las apuestas te están haciendo daño",
+      help_sub: "Esta herramienta es un apoyo, no un tratamiento. Combínala con ayuda real.",
+      help1_t: "Autoexclusión", help1_p: "Pide por escrito el cierre de tu cuenta en cada casa de apuestas donde juegues.",
+      help2_t: "Bloquea los pagos", help2_p: "Muchos bancos bloquean las transacciones de juego (código MCC 7995). Pregunta en el tuyo.",
+      help3_t: "Habla con alguien", help3_p: "Jugadores Anónimos tiene grupos gratuitos en toda América Latina: jugadoresanonimos.org",
+      foot_p: "Hecho para ayudar a la humanidad a dejar de apostar. Código abierto (licencia MIT): úsalo, cámbialo y compártelo con quien lo necesite. 💙",
+      foot_share: "Compartir esto"
+    },
+    en: {
+      nav_code: "Code",
+      nav_app: "My counter",
+      hero_eyebrow: "Free · Open source",
+      hero_title: "Take back control. Block the betting.",
+      hero_lede: "An app that blocks betting sites and apps on your phone and computer. No VPN, and built to be very hard to turn off in a moment of weakness.",
+      hero_reassure: "You are not alone. The urge passes.",
+      hero_cta1: "Choose my device", hero_cta2: "Find help", hero_cta_app: "My day counter",
+      stat1: "betting sites blocked", stat2: "platforms", stat3: "forever",
+      lock_eyebrow: "The lock",
+      lock_title: "It respects you when you're strong and protects you when you're weak.",
+      lock_sub: "Friction is the point: turning the block off needs a password and a waiting period you chose yourself.",
+      step1_t: "A guardian password", step1_p: "Ideally a trusted person types it and keeps it secret, so you can't remove the block on your own.",
+      step2_t: "A commitment period", step2_p: "You pick 7, 30, 90 days or a year. That time is your promise to yourself.",
+      step3_t: "It can't be shortened", step3_p: "During the commitment, not even the password can turn it off. The urge hits a wall.",
+      dev_eyebrow: "On all your devices", dev_title: "Pick yours. All three, no VPN.",
+      and_t: "Deep blocking", and_p: "Integrates with the system through Accessibility and Device Admin. Blocks betting apps and sites and defends itself from being uninstalled without the password.", and_cta: "Install on Android →",
+      ios_t: "Powered by Apple Screen Time", ios_p: "A profile filters betting sites system-wide and an app uses Screen Time. With the passcode held by someone else, it's very hard to bypass.", ios_cta: "Install on iPhone →",
+      pc_t: "On your computer too", pc_p: "Blocks the sites with a watchdog that repairs itself if tampered with. Starts with the system and needs the password to stop.", pc_cta: "Install on desktop →",
+      world_p: "<strong>Worldwide blocking.</strong> Hundreds of betting sites from every continent, plus a keyword layer (casino, betting, poker, roulette…) that also catches new ones and any not on the list.",
+      honesty_eyebrow: "No smoke", honesty_title: "What it does — and what it doesn't.",
+      honesty1: "No app can close your betting accounts: that's done through self-exclusion, directly with the operator.",
+      honesty2: "Without rooting or jailbreaking, nothing is 100% impossible to remove for someone with time and access.",
+      honesty3: "What it achieves is enough friction to stop the urge — especially if a trusted person holds the password.",
+      honesty4: "It's open source: anyone can verify there's no trick and it spies on nothing.",
+      help_eyebrow: "You're not alone", help_title: "If gambling is hurting you",
+      help_sub: "This tool is support, not treatment. Combine it with real help.",
+      help1_t: "Self-exclusion", help1_p: "Ask in writing to close your account at every betting site you use.",
+      help2_t: "Block the payments", help2_p: "Many banks block gambling transactions (MCC code 7995). Ask yours.",
+      help3_t: "Talk to someone", help3_p: "Gamblers Anonymous has free groups worldwide: gamblersanonymous.org",
+      foot_p: "Made to help humanity quit gambling. Open source (MIT license): use it, change it, and share it with anyone who needs it. 💙",
+      foot_share: "Share this"
+    },
+    pt: {
+      nav_code: "Código",
+      nav_app: "Meu contador",
+      hero_eyebrow: "Grátis · Código aberto",
+      hero_title: "Retome o controle. Bloqueie as apostas.",
+      hero_lede: "Um app que bloqueia sites e apps de apostas no seu celular e computador. Sem VPN, e feito para ser muito difícil de desativar num impulso.",
+      hero_reassure: "Você não está sozinho. A vontade passa.",
+      hero_cta1: "Escolher meu aparelho", hero_cta2: "Buscar ajuda", hero_cta_app: "Meu contador de dias",
+      stat1: "casas bloqueadas", stat2: "plataformas", stat3: "para sempre",
+      lock_eyebrow: "A tranca",
+      lock_title: "Respeita você quando está forte e protege quando está fraco.",
+      lock_sub: "A chave é a fricção: para desativar o bloqueio é preciso uma senha e que passe um tempo que você mesmo escolheu.",
+      step1_t: "Uma senha de guardião", step1_p: "O ideal é que outra pessoa de confiança digite e não te conte. Assim você não tira o bloqueio sozinho.",
+      step2_t: "Um período de compromisso", step2_p: "Você escolhe 7, 30, 90 dias ou um ano. Esse tempo é a sua promessa consigo mesmo.",
+      step3_t: "Não dá para encurtar", step3_p: "Durante o compromisso, nem com a senha dá para desativar. A vontade bate numa parede.",
+      dev_eyebrow: "Em todos os seus aparelhos", dev_title: "Escolha o seu. Os três sem VPN.",
+      and_t: "Bloqueio profundo", and_p: "Integra-se ao sistema com Acessibilidade e Administrador do dispositivo. Bloqueia apps e sites de apostas e se defende de ser desinstalado sem a senha.", and_cta: "Instalar no Android →",
+      ios_t: "Com o Tempo de Uso da Apple", ios_p: "Um perfil filtra os sites de apostas em todo o sistema e um app usa o Tempo de Uso. Com a senha nas mãos de outra pessoa, é muito difícil burlar.", ios_cta: "Instalar no iPhone →",
+      pc_t: "No computador também", pc_p: "Bloqueia os sites com um vigia que se repara sozinho se alguém mexer. Inicia com o sistema e pede a senha para parar.", pc_cta: "Instalar no computador →",
+      world_p: "<strong>Bloqueio mundial.</strong> Centenas de casas de apostas de todos os continentes, mais uma camada de palavras-chave (casino, aposta, poker, roleta…) que pega também as novas e as que não estão na lista.",
+      honesty_eyebrow: "Sem enrolação", honesty_title: "O que ele faz — e o que não faz.",
+      honesty1: "Nenhum app fecha suas contas de apostas: isso é feito com a autoexclusão, direto com o operador.",
+      honesty2: "Sem root ou jailbreak, nada é 100% impossível de remover para quem tem tempo e permissões.",
+      honesty3: "O que ele consegue é fricção suficiente para frear o impulso, principalmente se a senha ficar com alguém de confiança.",
+      honesty4: "É código aberto: qualquer um pode conferir que não há truque nem espionagem.",
+      help_eyebrow: "Você não está sozinho", help_title: "Se as apostas estão te fazendo mal",
+      help_sub: "Esta ferramenta é apoio, não tratamento. Combine com ajuda de verdade.",
+      help1_t: "Autoexclusão", help1_p: "Peça por escrito o encerramento da sua conta em cada casa de apostas que você usa.",
+      help2_t: "Bloqueie os pagamentos", help2_p: "Muitos bancos bloqueiam transações de jogo (código MCC 7995). Pergunte no seu.",
+      help3_t: "Fale com alguém", help3_p: "Jogadores Anônimos tem grupos gratuitos no Brasil todo: jogadoresanonimos.org.br",
+      foot_p: "Feito para ajudar a humanidade a parar de apostar. Código aberto (licença MIT): use, mude e compartilhe com quem precisar. 💙",
+      foot_share: "Compartilhar"
     }
-  }
-}
-function pintarHitos(ms){
-  const prox = HITOS.find(h => ms < h.d*86400000);
-  if(prox){
-    const previo = HITOS[HITOS.indexOf(prox)-1];
-    const base = previo ? previo.d*86400000 : 0;
-    const pct = Math.min(100, (ms-base)/(prox.d*86400000-base)*100);
-    const faltaMs = prox.d*86400000 - ms;
-    const faltaD = Math.floor(faltaMs/86400000), faltaH = Math.ceil((faltaMs%86400000)/3600000);
-    $("hito-proximo").innerHTML =
-      `<div class="fila" style="justify-content:space-between"><b>${prox.e} ${prox.n}</b>` +
-      `<span class="hito-falta">falta${faltaD>0? ` ${faltaD} d`:""} ${faltaH} h</span></div>`;
-    $("hito-barra").style.width = pct + "%";
-  }else{
-    $("hito-proximo").innerHTML = `<b>🌟 ¡Superaste todos los logros!</b>`;
-    $("hito-barra").style.width = "100%";
-  }
-  $("hitos-lista").innerHTML = HITOS.map(h => {
-    const ok = ms >= h.d*86400000;
-    return `<div class="hito-fila ${ok?"logrado":""}">
-      <div class="hito-ico">${h.e}</div>
-      <div class="hito-nombre">${h.n}</div>
-      ${ok ? '<div class="hito-check">✓</div>' : `<div class="hito-falta">día ${h.d}</div>`}
-    </div>`;
-  }).join("");
-}
-function pintarRazones(){
-  const cont = $("inicio-razones");
-  if(S.razones.length){
-    $("card-razones").style.display = "block";
-    cont.innerHTML = S.razones.map(r => `<span class="chip">${esc(r)}</span>`).join("");
-  }else{
-    $("card-razones").style.display = "none";
-  }
-}
+  };
 
-/* ================= SOS ================= */
-function abrirSOS(){
-  $("sos-razones").innerHTML = S.razones.length
-    ? `<div class="sub" style="margin-bottom:8px">Recuerda por qué empezaste:</div>` +
-      S.razones.map(r => `<div class="sos-razon">💚 ${esc(r)}</div>`).join("")
-    : "";
-  $("sos").classList.add("abierta");
-}
-function cerrarSOS(){ $("sos").classList.remove("abierta"); }
-function superado(){
-  cerrarSOS();
-  toast("💪 Eso es tener fuerza de verdad. Sigue sumando.");
-}
+  function setLang(lang) {
+    const dict = I18N[lang] || I18N.es;
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if (dict[key] != null) el.innerHTML = dict[key];
+    });
+    document.querySelectorAll(".langs button").forEach(b =>
+      b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+    try { localStorage.setItem("sinapuestas_lang", lang); } catch (e) {}
+  }
 
-/* ================= recaídas ================= */
-function abrirRecaida(){ $("rec-monto").value=""; $("rec-nota").value=""; $("recaida").classList.add("abierta"); }
-function cerrar(id){ $(id).classList.remove("abierta"); }
-function confirmarRecaida(){
-  const monto = parseFloat($("rec-monto").value) || 0;
-  const rachaMs = msRacha();
-  S.recordMs = Math.max(S.recordMs, rachaMs);
-  S.ahorroPrevio += ahorro(rachaMs);
-  S.recaidas.unshift({
-    fecha: new Date().toISOString(),
-    monto: monto,
-    nota: $("rec-nota").value.trim(),
-    rachaDias: Math.floor(rachaMs/86400000),
+  document.querySelectorAll(".langs button").forEach(b =>
+    b.addEventListener("click", () => setLang(b.dataset.lang)));
+
+  let initial = "es";
+  try {
+    initial = localStorage.getItem("sinapuestas_lang")
+      || (navigator.language || "es").slice(0,2);
+  } catch (e) {}
+  if (!I18N[initial]) initial = "es";
+  setLang(initial);
+
+  document.getElementById("shareBtn").addEventListener("click", async () => {
+    const data = { title: "SinApuestas", text: "Una app gratis para bloquear las apuestas y recuperar el control.", url: location.href };
+    try {
+      if (navigator.share) await navigator.share(data);
+      else { await navigator.clipboard.writeText(location.href); const b = document.getElementById("shareBtn"); const t = b.textContent; b.textContent = "¡Link copiado!"; setTimeout(()=>b.textContent=t, 1800); }
+    } catch (e) {}
   });
-  S.inicio = new Date().toISOString();
-  guardar();
-  hitosAvisados = new Set();
-  cerrar("recaida");
-  tick();
-  irA("inicio");
-  toast("Contador reiniciado. Hoy empieza tu mejor racha 💚");
-}
-function pintarHistorial(){
-  $("h-recaidas").textContent = S.recaidas.length;
-  const perdido = S.recaidas.reduce((a,r)=> a + (r.monto||0), 0);
-  $("h-perdido").textContent = dinero(perdido);
-  $("rec-lista").innerHTML = S.recaidas.length
-    ? S.recaidas.map(r => `<div class="rec-item">
-        <div style="flex:1">
-          <div class="rec-fecha">${new Date(r.fecha).toLocaleString("es",{dateStyle:"medium",timeStyle:"short"})} · llevabas ${r.rachaDias} día${r.rachaDias===1?"":"s"}</div>
-          ${r.nota ? `<div class="rec-nota">${esc(r.nota)}</div>` : ""}
-        </div>
-        <div class="rec-monto">−${dinero(r.monto||0)}</div>
-      </div>`).join("")
-    : '<div class="meta-lista-vacia">Ninguna. ¡Sigue así! 💪</div>';
-}
-
-/* ================= metas ================= */
-function agregarMeta(){
-  const nombre = $("meta-nombre").value.trim();
-  const costo = parseFloat($("meta-costo").value);
-  if(!nombre || !(costo > 0)){ toast("Escribe la meta y su costo 🙂"); return; }
-  S.metas = S.metas || [];
-  S.metas.push({nombre, costo});
-  guardar();
-  $("meta-nombre").value = ""; $("meta-costo").value = "";
-  pintarMetas();
-  toast("Meta agregada 🎯");
-}
-function quitarMeta(i){ S.metas.splice(i,1); guardar(); pintarMetas(); }
-function pintarMetas(){
-  const disponible = ahorro(msRacha()) + (S.ahorroPrevio||0);
-  const metas = S.metas || [];
-  $("metas-lista").innerHTML = metas.length
-    ? metas.map((m,i) => {
-        const pct = Math.min(100, disponible/m.costo*100);
-        return `<div class="meta-item">
-          <div class="meta-top">
-            <span class="meta-nombre">${pct>=100?"✅ ":""}${esc(m.nombre)}</span>
-            <span class="meta-monto">${dinero(Math.min(disponible,m.costo))} / ${dinero(m.costo)}
-              <button class="x-btn" onclick="quitarMeta(${i})">✕</button></span>
-          </div>
-          <div class="barra"><div style="width:${pct}%"></div></div>
-        </div>`;
-      }).join("")
-    : '<div class="meta-lista-vacia">Aún no tienes metas. Agrega la primera 👇</div>';
-}
-
-/* ================= ajustes ================= */
-function pintarAjustes(){
-  $("aj-gasto").value = S.gastoSemanal || "";
-  $("aj-moneda").value = S.moneda || "$";
-  $("aj-fecha").value = fechaLocalInput(S.inicio);
-  pintarAjChips();
-}
-function pintarAjChips(){
-  $("aj-chips").innerHTML = S.razones.map((r,i)=>
-    `<span class="chip">${esc(r)}<button class="x-btn" onclick="quitarRazon(${i})">✕</button></span>`).join("");
-}
-function ajAgregarRazon(){
-  const v = $("aj-razon").value.trim();
-  if(!v) return;
-  S.razones.push(v); $("aj-razon").value = "";
-  guardar(); pintarAjChips(); pintarRazones();
-}
-function quitarRazon(i){ S.razones.splice(i,1); guardar(); pintarAjChips(); pintarRazones(); }
-function guardarAjustes(){
-  S.gastoSemanal = parseFloat($("aj-gasto").value) || 0;
-  S.moneda = $("aj-moneda").value;
-  const f = $("aj-fecha").value;
-  if(f) S.inicio = new Date(f).toISOString();
-  guardar(); tick();
-  toast("Cambios guardados ✓");
-}
-function borrarTodo(){
-  if(!confirm("¿Seguro? Se borrará todo tu progreso de este teléfono.")) return;
-  if(!confirm("Última confirmación: esto no se puede deshacer.")) return;
-  localStorage.removeItem(CLAVE);
-  location.reload();
-}
-
-/* ================= arranque ================= */
-function montarApp(){
-  $("onb").classList.remove("activa");
-  $("tabbar").style.display = "block";
-  const ms = msRacha();
-  HITOS.forEach(h => { if(ms >= h.d*86400000) hitosAvisados.add(h.d); });
-  pintarRazones();
-  irA("inicio");
-  tick();
-}
-cargar();
-if(S && S.inicio){
-  montarApp();
-}else{
-  $("onb").classList.add("activa");
-  $("onb-fecha").value = fechaLocalInput(new Date());
-}
-setInterval(tick, 1000);
 </script>
 </body>
 </html>

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sin Apuestas — Cada día cuenta</title>
+<meta name="description" content="Deja de apostar. Cuenta tus días limpios, mira cuánto dinero has ahorrado y cumple tus metas.">
+<meta name="theme-color" content="#0B1220">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Sin Apuestas">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B1220'/%3E%3Cpath d='M50 16c-14 14-24 24-24 38a24 24 0 0 0 48 0c0-14-10-24-24-38z' fill='%2310B981'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B1220; --bg2:#111B2E; --card:#16233B; --card2:#1C2C48;
+    --line:#24365A; --txt:#EAF1FB; --txt2:#8FA3C4; --txt3:#5D7196;
+    --verde:#10B981; --verde2:#34D399; --verdebg:rgba(16,185,129,.12);
+    --rojo:#F87171; --rojobg:rgba(248,113,113,.12);
+    --oro:#FBBF24; --orobg:rgba(251,191,36,.12);
+    --azul:#60A5FA;
+    --radius:20px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--txt);
+    font-size:16px;line-height:1.5;overscroll-behavior:none;
+  }
+  #root{max-width:520px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column}
+
+  /* ---------- genéricos ---------- */
+  .screen{flex:1;padding:24px 20px calc(96px + env(safe-area-inset-bottom));display:none}
+  .screen.activa{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:14px}
+  h1{font-size:24px;font-weight:800;letter-spacing:-.02em}
+  h2{font-size:17px;font-weight:700;margin-bottom:12px}
+  .sub{color:var(--txt2);font-size:14px}
+  .btn{
+    display:block;width:100%;padding:16px;border:none;border-radius:16px;cursor:pointer;
+    font-family:inherit;font-size:16px;font-weight:700;color:#06281C;background:var(--verde);
+    transition:transform .08s ease,filter .15s;
+  }
+  .btn:active{transform:scale(.97);filter:brightness(1.1)}
+  .btn.sec{background:var(--card2);color:var(--txt);border:1px solid var(--line)}
+  .btn.peligro{background:var(--rojobg);color:var(--rojo);border:1px solid rgba(248,113,113,.3)}
+  .btn.chico{width:auto;padding:10px 16px;font-size:14px;border-radius:12px;display:inline-block}
+  label{display:block;font-size:13px;font-weight:600;color:var(--txt2);margin:14px 0 6px}
+  input,textarea,select{
+    width:100%;padding:14px;border-radius:14px;border:1px solid var(--line);background:var(--bg2);
+    color:var(--txt);font-family:inherit;font-size:16px;outline:none;
+  }
+  input:focus,textarea:focus{border-color:var(--verde)}
+  .fila{display:flex;gap:10px;align-items:center}
+  .fila>*{flex:1}
+
+  /* ---------- onboarding ---------- */
+  #onb{padding:40px 24px;display:none;flex-direction:column;justify-content:center;min-height:100dvh}
+  #onb.activa{display:flex;animation:fade .3s ease}
+  .logo-grande{font-size:56px;text-align:center;margin-bottom:8px}
+  .onb-titulo{text-align:center;font-size:30px;font-weight:900;letter-spacing:-.03em;margin-bottom:6px}
+  .onb-titulo em{color:var(--verde);font-style:normal}
+  .onb-sub{text-align:center;color:var(--txt2);margin-bottom:28px}
+
+  /* ---------- contador ---------- */
+  .hero{
+    background:linear-gradient(160deg,#0E3B2E 0%,#123528 45%,var(--card) 100%);
+    border:1px solid rgba(16,185,129,.35);border-radius:26px;padding:28px 20px;text-align:center;margin-bottom:14px;
+  }
+  .hero .etiqueta{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--verde2)}
+  .dias-num{font-size:76px;font-weight:900;letter-spacing:-.04em;line-height:1.05;
+    background:linear-gradient(180deg,#fff, #A7F3D0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .dias-palabra{font-size:18px;font-weight:700;color:var(--verde2);margin-bottom:14px}
+  .reloj{display:flex;justify-content:center;gap:8px}
+  .reloj .u{background:rgba(0,0,0,.28);border-radius:12px;padding:8px 0;width:76px}
+  .reloj .n{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums}
+  .reloj .t{font-size:10px;color:var(--txt2);text-transform:uppercase;letter-spacing:.08em}
+
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+  .stat .v{font-size:24px;font-weight:800;letter-spacing:-.02em}
+  .stat .k{font-size:12px;color:var(--txt2);margin-top:2px}
+  .stat.verde .v{color:var(--verde2)}
+  .stat.oro .v{color:var(--oro)}
+
+  .btn-sos{
+    background:linear-gradient(135deg,#F87171,#EF4444);color:#fff;font-size:17px;
+    box-shadow:0 8px 24px rgba(239,68,68,.25);margin-bottom:14px;
+  }
+  .hito-fila{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .hito-fila:last-child{border-bottom:none}
+  .hito-ico{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--bg2);flex-shrink:0}
+  .hito-fila.logrado .hito-ico{background:var(--verdebg)}
+  .hito-fila.logrado .hito-nombre{color:var(--verde2)}
+  .hito-nombre{font-weight:600;font-size:14px;flex:1}
+  .hito-check{color:var(--verde);font-weight:800}
+  .hito-falta{color:var(--txt3);font-size:12px}
+  .barra{height:8px;background:var(--bg2);border-radius:99px;overflow:hidden;margin-top:10px}
+  .barra>div{height:100%;background:linear-gradient(90deg,var(--verde),var(--verde2));border-radius:99px;transition:width .4s ease}
+
+  /* ---------- metas ---------- */
+  .meta-item{padding:14px 0;border-bottom:1px solid var(--line)}
+  .meta-item:last-child{border-bottom:none}
+  .meta-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .meta-nombre{font-weight:700}
+  .meta-monto{font-size:13px;color:var(--txt2);white-space:nowrap}
+  .meta-lista-vacia{color:var(--txt3);text-align:center;padding:20px 0;font-size:14px}
+  .x-btn{background:none;border:none;color:var(--txt3);font-size:18px;cursor:pointer;padding:4px 8px}
+
+  /* ---------- historial ---------- */
+  .rec-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+  .rec-item:last-child{border-bottom:none}
+  .rec-fecha{font-size:12px;color:var(--txt2)}
+  .rec-monto{color:var(--rojo);font-weight:700;white-space:nowrap}
+  .rec-nota{font-size:13px;color:var(--txt2);margin-top:2px}
+
+  /* ---------- razones chips ---------- */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .chip{background:var(--verdebg);color:var(--verde2);border:1px solid rgba(16,185,129,.3);
+    padding:7px 12px;border-radius:99px;font-size:13px;font-weight:600}
+  .chip .x-btn{font-size:14px;color:var(--verde2);padding:0 0 0 6px}
+
+  /* ---------- tabbar ---------- */
+  #tabbar{
+    position:fixed;bottom:0;left:0;right:0;z-index:50;display:none;
+    background:rgba(11,18,32,.92);backdrop-filter:blur(14px);border-top:1px solid var(--line);
+  }
+  #tabbar .inner{max-width:520px;margin:0 auto;display:flex;padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
+  .tab{
+    flex:1;background:none;border:none;color:var(--txt3);font-family:inherit;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10.5px;font-weight:600;padding:6px 0;border-radius:12px;
+  }
+  .tab .ico{font-size:21px;line-height:1}
+  .tab.activa{color:var(--verde2)}
+
+  /* ---------- modales ---------- */
+  .velo{position:fixed;inset:0;background:rgba(4,8,16,.75);backdrop-filter:blur(6px);z-index:100;display:none;align-items:flex-end;justify-content:center}
+  .velo.abierta{display:flex;animation:fade .2s ease}
+  .hoja{background:var(--bg2);border:1px solid var(--line);border-bottom:none;border-radius:24px 24px 0 0;
+    width:100%;max-width:520px;padding:24px 20px calc(24px + env(safe-area-inset-bottom));max-height:88dvh;overflow-y:auto}
+  .hoja h2{font-size:20px}
+
+  /* ---------- SOS ---------- */
+  #sos .hoja{background:linear-gradient(180deg,#1A2338,#0B1220);text-align:center}
+  .resp-circulo{
+    width:150px;height:150px;border-radius:50%;margin:26px auto;
+    background:radial-gradient(circle,var(--verdebg),transparent 70%);
+    border:2px solid var(--verde);display:flex;align-items:center;justify-content:center;
+    font-weight:700;color:var(--verde2);font-size:15px;
+    animation:respirar 10s ease-in-out infinite;
+  }
+  @keyframes respirar{
+    0%{transform:scale(.72)} 40%{transform:scale(1.08)} 55%{transform:scale(1.08)} 100%{transform:scale(.72)}
+  }
+  .sos-razones{text-align:left;margin:18px 0}
+  .sos-razon{padding:10px 14px;background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:8px;font-size:14px;font-weight:600}
+  .sos-tips{text-align:left;color:var(--txt2);font-size:13px;margin:14px 0 20px}
+  .sos-tips li{margin:6px 0 6px 18px}
+
+  .toast{
+    position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:200;
+    background:var(--card2);border:1px solid var(--verde);color:var(--txt);
+    padding:12px 20px;border-radius:14px;font-weight:600;font-size:14px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);display:none;max-width:90%;text-align:center;
+  }
+  .peq{font-size:12px;color:var(--txt3);text-align:center;margin-top:8px}
+</style>
+</head>
+<body>
+<div id="root">
+
+  <!-- ============ ONBOARDING ============ -->
+  <div id="onb">
+    <div class="logo-grande">🍀</div>
+    <div class="onb-titulo">Sin <em>Apuestas</em></div>
+    <div class="onb-sub">Cada día sin apostar es dinero y vida que recuperas.</div>
+    <div class="card">
+      <label>¿Cuándo fue tu última apuesta?</label>
+      <input type="datetime-local" id="onb-fecha">
+      <label>¿Cuánto gastabas en apuestas por semana? (aprox.)</label>
+      <div class="fila">
+        <input type="number" id="onb-gasto" inputmode="decimal" min="0" placeholder="Ej: 100">
+        <select id="onb-moneda" style="max-width:110px">
+          <option value="$">$ USD</option><option value="€">€ EUR</option><option value="Q">Q GTQ</option>
+          <option value="L">L HNL</option><option value="C$">C$ NIO</option><option value="₡">₡ CRC</option>
+          <option value="S/">S/ PEN</option><option value="COL$">$ COP</option><option value="MX$">$ MXN</option>
+        </select>
+      </div>
+      <label>¿Por qué quieres dejarlo? (puedes agregar varias)</label>
+      <div class="fila">
+        <input type="text" id="onb-razon" placeholder="Ej: mi familia, salir de deudas…">
+        <button class="btn sec chico" style="flex:0 0 auto" onclick="onbAgregarRazon()">＋</button>
+      </div>
+      <div class="chips" id="onb-chips"></div>
+    </div>
+    <button class="btn" onclick="empezar()">Empezar mi cuenta 🚀</button>
+    <div class="peq">Tus datos se guardan solo en tu teléfono.</div>
+  </div>
+
+  <!-- ============ INICIO ============ -->
+  <div id="scr-inicio" class="screen">
+    <div class="hero">
+      <div class="etiqueta">Sin apostar llevas</div>
+      <div class="dias-num" id="dias-num">0</div>
+      <div class="dias-palabra" id="dias-palabra">días</div>
+      <div class="reloj">
+        <div class="u"><div class="n" id="rl-h">00</div><div class="t">horas</div></div>
+        <div class="u"><div class="n" id="rl-m">00</div><div class="t">min</div></div>
+        <div class="u"><div class="n" id="rl-s">00</div><div class="t">seg</div></div>
+      </div>
+    </div>
+
+    <button class="btn btn-sos" onclick="abrirSOS()">🆘 Tengo ganas de apostar</button>
+
+    <div class="stats">
+      <div class="stat verde"><div class="v" id="st-ahorro">$0</div><div class="k">ahorrado esta racha</div></div>
+      <div class="stat oro"><div class="v" id="st-record">0 días</div><div class="k">tu mejor racha</div></div>
+    </div>
+
+    <div class="card">
+      <h2>🏅 Próximo logro</h2>
+      <div id="hito-proximo"></div>
+      <div class="barra"><div id="hito-barra" style="width:0%"></div></div>
+      <div style="margin-top:16px" id="hitos-lista"></div>
+    </div>
+
+    <div class="card" id="card-razones" style="display:none">
+      <h2>💚 Lo haces por…</h2>
+      <div class="chips" id="inicio-razones"></div>
+    </div>
+  </div>
+
+  <!-- ============ METAS ============ -->
+  <div id="scr-metas" class="screen">
+    <h1>Metas 🎯</h1>
+    <p class="sub" style="margin-bottom:16px">¿Qué vas a hacer con el dinero que ya no pierdes?</p>
+    <div class="card">
+      <div id="metas-lista"><div class="meta-lista-vacia">Aún no tienes metas. Agrega la primera 👇</div></div>
+    </div>
+    <div class="card">
+      <h2>Nueva meta</h2>
+      <label>¿Qué quieres lograr o comprar?</label>
+      <input type="text" id="meta-nombre" placeholder="Ej: pagar deuda, viaje, bici…">
+      <label>¿Cuánto cuesta?</label>
+      <input type="number" id="meta-costo" inputmode="decimal" min="1" placeholder="Ej: 500">
+      <div style="height:14px"></div>
+      <button class="btn" onclick="agregarMeta()">Agregar meta</button>
+    </div>
+  </div>
+
+  <!-- ============ HISTORIAL ============ -->
+  <div id="scr-historial" class="screen">
+    <h1>Historial 📖</h1>
+    <p class="sub" style="margin-bottom:16px">Las recaídas no borran tu progreso: son parte del camino.</p>
+    <div class="stats">
+      <div class="stat"><div class="v" id="h-recaidas">0</div><div class="k">recaídas registradas</div></div>
+      <div class="stat"><div class="v" id="h-perdido" style="color:var(--rojo)">$0</div><div class="k">perdido en recaídas</div></div>
+    </div>
+    <div class="card">
+      <h2>Recaídas</h2>
+      <div id="rec-lista"><div class="meta-lista-vacia">Ninguna. ¡Sigue así! 💪</div></div>
+    </div>
+  </div>
+
+  <!-- ============ AJUSTES ============ -->
+  <div id="scr-ajustes" class="screen">
+    <h1>Ajustes ⚙️</h1>
+    <div style="height:12px"></div>
+    <div class="card">
+      <h2>Mi información</h2>
+      <label>Gasto semanal en apuestas (antes de dejar)</label>
+      <div class="fila">
+        <input type="number" id="aj-gasto" inputmode="decimal" min="0">
+        <select id="aj-moneda" style="max-width:110px">
+          <option value="$">$ USD</option><option value="€">€ EUR</option><option value="Q">Q GTQ</option>
+          <option value="L">L HNL</option><option value="C$">C$ NIO</option><option value="₡">₡ CRC</option>
+          <option value="S/">S/ PEN</option><option value="COL$">$ COP</option><option value="MX$">$ MXN</option>
+        </select>
+      </div>
+      <label>Fecha de mi última apuesta</label>
+      <input type="datetime-local" id="aj-fecha">
+      <div style="height:14px"></div>
+      <button class="btn" onclick="guardarAjustes()">Guardar cambios</button>
+    </div>
+    <div class="card">
+      <h2>Mis razones</h2>
+      <div class="fila">
+        <input type="text" id="aj-razon" placeholder="Agregar razón…">
+        <button class="btn sec chico" style="flex:0 0 auto" onclick="ajAgregarRazon()">＋</button>
+      </div>
+      <div class="chips" id="aj-chips"></div>
+    </div>
+    <div class="card">
+      <h2>Zona de peligro</h2>
+      <button class="btn peligro" onclick="borrarTodo()">Borrar todos mis datos</button>
+    </div>
+    <div class="peq">Sin Apuestas v1.0 — hecho con 💚</div>
+  </div>
+
+  <!-- ============ TABBAR ============ -->
+  <nav id="tabbar"><div class="inner">
+    <button class="tab activa" data-scr="inicio" onclick="irA('inicio')"><span class="ico">🍀</span>Inicio</button>
+    <button class="tab" data-scr="metas" onclick="irA('metas')"><span class="ico">🎯</span>Metas</button>
+    <button class="tab" data-scr="historial" onclick="irA('historial')"><span class="ico">📖</span>Historial</button>
+    <button class="tab" data-scr="ajustes" onclick="irA('ajustes')"><span class="ico">⚙️</span>Ajustes</button>
+  </div></nav>
+
+  <!-- ============ MODAL SOS ============ -->
+  <div class="velo" id="sos">
+    <div class="hoja">
+      <h2>Respira. Esto va a pasar. 💚</h2>
+      <p class="sub" style="margin-top:6px">Las ganas de apostar duran unos minutos y se van. Respira con el círculo.</p>
+      <div class="resp-circulo">inhala… exhala</div>
+      <div class="sos-razones" id="sos-razones"></div>
+      <ul class="sos-tips">
+        <li>Espera 10 minutos antes de decidir nada: la urgencia baja sola.</li>
+        <li>Llama o escríbele a alguien de confianza ahora mismo.</li>
+        <li>Sal a caminar o cambia de lugar: aleja el teléfono del bolsillo.</li>
+        <li>Recuerda: la casa siempre gana. Tu dinero ya está trabajando para ti.</li>
+      </ul>
+      <button class="btn" onclick="superado()">Ya pasó, sigo firme 💪</button>
+      <div style="height:10px"></div>
+      <button class="btn sec" onclick="cerrarSOS();abrirRecaida()">Aposté… quiero registrarlo</button>
+    </div>
+  </div>
+
+  <!-- ============ MODAL RECAÍDA ============ -->
+  <div class="velo" id="recaida">
+    <div class="hoja">
+      <h2>Registrar recaída</h2>
+      <p class="sub" style="margin-top:6px">Sin culpa. Lo importante es volver a empezar hoy mismo.</p>
+      <label>¿Cuánto apostaste?</label>
+      <input type="number" id="rec-monto" inputmode="decimal" min="0" placeholder="Ej: 50">
+      <label>¿Qué pasó? (opcional)</label>
+      <textarea id="rec-nota" rows="2" placeholder="Dónde estabas, qué sentías…"></textarea>
+      <div style="height:16px"></div>
+      <button class="btn" onclick="confirmarRecaida()">Guardar y reiniciar contador</button>
+      <div style="height:10px"></div>
+      <button class="btn sec" onclick="cerrar('recaida')">Cancelar</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+"use strict";
+/* ================= estado ================= */
+const CLAVE = "sinapuestas_v1";
+const HITOS = [
+  {d:1,   n:"1 día limpio",      e:"🌱"},
+  {d:3,   n:"3 días",            e:"🔥"},
+  {d:7,   n:"1 semana",          e:"⭐"},
+  {d:14,  n:"2 semanas",         e:"🚀"},
+  {d:30,  n:"1 mes",             e:"🏆"},
+  {d:60,  n:"2 meses",           e:"💎"},
+  {d:90,  n:"3 meses",           e:"👑"},
+  {d:180, n:"6 meses",           e:"🦁"},
+  {d:365, n:"1 año sin apostar", e:"🌟"},
+];
+let S = null;          // estado global de la app
+let hitosAvisados = new Set();
+
+function cargar(){
+  try{ S = JSON.parse(localStorage.getItem(CLAVE)); }catch(e){ S = null; }
+}
+function guardar(){ localStorage.setItem(CLAVE, JSON.stringify(S)); }
+
+/* ================= utilidades ================= */
+const $ = id => document.getElementById(id);
+const pad = n => String(n).padStart(2,"0");
+function esc(s){ return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function dinero(v){
+  const m = (S && S.moneda) || "$";
+  return m + v.toLocaleString("es", {maximumFractionDigits: v < 100 ? 2 : 0});
+}
+function msRacha(){ return Math.max(0, Date.now() - new Date(S.inicio).getTime()); }
+function ahorro(ms){ return (S.gastoSemanal || 0) / (7*86400000) * ms; }
+function fechaLocalInput(d){
+  const x = new Date(d); x.setMinutes(x.getMinutes() - x.getTimezoneOffset());
+  return x.toISOString().slice(0,16);
+}
+function toast(msg){
+  const t = $("toast"); t.textContent = msg; t.style.display = "block";
+  clearTimeout(t._tm); t._tm = setTimeout(()=> t.style.display = "none", 3200);
+}
+
+/* ================= onboarding ================= */
+let onbRazones = [];
+function pintarOnbChips(){
+  $("onb-chips").innerHTML = onbRazones.map((r,i)=>
+    `<span class="chip">${esc(r)}<button class="x-btn" onclick="quitarOnbRazon(${i})">✕</button></span>`).join("");
+}
+function onbAgregarRazon(){
+  const inp = $("onb-razon"), v = inp.value.trim();
+  if(!v) return;
+  onbRazones.push(v); inp.value = "";
+  pintarOnbChips();
+}
+function quitarOnbRazon(i){ onbRazones.splice(i,1); pintarOnbChips(); }
+function empezar(){
+  const fecha = $("onb-fecha").value || fechaLocalInput(new Date());
+  const gasto = parseFloat($("onb-gasto").value) || 0;
+  S = {
+    inicio: new Date(fecha).toISOString(),
+    gastoSemanal: gasto,
+    moneda: $("onb-moneda").value,
+    razones: onbRazones.slice(),
+    recaidas: [],
+    metas: [],
+    recordMs: 0,
+    ahorroPrevio: 0,
+    creado: new Date().toISOString(),
+  };
+  guardar();
+  montarApp();
+  toast("¡Empezamos! Cada segundo ya cuenta 💚");
+}
+
+/* ================= navegación ================= */
+function irA(nombre){
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("activa"));
+  $("scr-"+nombre).classList.add("activa");
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("activa", t.dataset.scr === nombre));
+  if(nombre === "metas") pintarMetas();
+  if(nombre === "historial") pintarHistorial();
+  if(nombre === "ajustes") pintarAjustes();
+  window.scrollTo(0,0);
+}
+
+/* ================= inicio / contador ================= */
+function tick(){
+  if(!S) return;
+  const ms = msRacha();
+  const dias = Math.floor(ms/86400000);
+  $("dias-num").textContent = dias;
+  $("dias-palabra").textContent = dias === 1 ? "día" : "días";
+  $("rl-h").textContent = pad(Math.floor(ms/3600000) % 24);
+  $("rl-m").textContent = pad(Math.floor(ms/60000) % 60);
+  $("rl-s").textContent = pad(Math.floor(ms/1000) % 60);
+  $("st-ahorro").textContent = dinero(ahorro(ms));
+  const recDias = Math.floor(Math.max(S.recordMs, ms)/86400000);
+  $("st-record").textContent = recDias + (recDias===1?" día":" días");
+  pintarHitos(ms);
+  for(const hito of HITOS){
+    if(ms >= hito.d*86400000 && !hitosAvisados.has(hito.d)){
+      hitosAvisados.add(hito.d);
+      if(ms - hito.d*86400000 < 2000) toast(`${hito.e} ¡Lograste ${hito.n}!`);
+    }
+  }
+}
+function pintarHitos(ms){
+  const prox = HITOS.find(h => ms < h.d*86400000);
+  if(prox){
+    const previo = HITOS[HITOS.indexOf(prox)-1];
+    const base = previo ? previo.d*86400000 : 0;
+    const pct = Math.min(100, (ms-base)/(prox.d*86400000-base)*100);
+    const faltaMs = prox.d*86400000 - ms;
+    const faltaD = Math.floor(faltaMs/86400000), faltaH = Math.ceil((faltaMs%86400000)/3600000);
+    $("hito-proximo").innerHTML =
+      `<div class="fila" style="justify-content:space-between"><b>${prox.e} ${prox.n}</b>` +
+      `<span class="hito-falta">falta${faltaD>0? ` ${faltaD} d`:""} ${faltaH} h</span></div>`;
+    $("hito-barra").style.width = pct + "%";
+  }else{
+    $("hito-proximo").innerHTML = `<b>🌟 ¡Superaste todos los logros!</b>`;
+    $("hito-barra").style.width = "100%";
+  }
+  $("hitos-lista").innerHTML = HITOS.map(h => {
+    const ok = ms >= h.d*86400000;
+    return `<div class="hito-fila ${ok?"logrado":""}">
+      <div class="hito-ico">${h.e}</div>
+      <div class="hito-nombre">${h.n}</div>
+      ${ok ? '<div class="hito-check">✓</div>' : `<div class="hito-falta">día ${h.d}</div>`}
+    </div>`;
+  }).join("");
+}
+function pintarRazones(){
+  const cont = $("inicio-razones");
+  if(S.razones.length){
+    $("card-razones").style.display = "block";
+    cont.innerHTML = S.razones.map(r => `<span class="chip">${esc(r)}</span>`).join("");
+  }else{
+    $("card-razones").style.display = "none";
+  }
+}
+
+/* ================= SOS ================= */
+function abrirSOS(){
+  $("sos-razones").innerHTML = S.razones.length
+    ? `<div class="sub" style="margin-bottom:8px">Recuerda por qué empezaste:</div>` +
+      S.razones.map(r => `<div class="sos-razon">💚 ${esc(r)}</div>`).join("")
+    : "";
+  $("sos").classList.add("abierta");
+}
+function cerrarSOS(){ $("sos").classList.remove("abierta"); }
+function superado(){
+  cerrarSOS();
+  toast("💪 Eso es tener fuerza de verdad. Sigue sumando.");
+}
+
+/* ================= recaídas ================= */
+function abrirRecaida(){ $("rec-monto").value=""; $("rec-nota").value=""; $("recaida").classList.add("abierta"); }
+function cerrar(id){ $(id).classList.remove("abierta"); }
+function confirmarRecaida(){
+  const monto = parseFloat($("rec-monto").value) || 0;
+  const rachaMs = msRacha();
+  S.recordMs = Math.max(S.recordMs, rachaMs);
+  S.ahorroPrevio += ahorro(rachaMs);
+  S.recaidas.unshift({
+    fecha: new Date().toISOString(),
+    monto: monto,
+    nota: $("rec-nota").value.trim(),
+    rachaDias: Math.floor(rachaMs/86400000),
+  });
+  S.inicio = new Date().toISOString();
+  guardar();
+  hitosAvisados = new Set();
+  cerrar("recaida");
+  tick();
+  irA("inicio");
+  toast("Contador reiniciado. Hoy empieza tu mejor racha 💚");
+}
+function pintarHistorial(){
+  $("h-recaidas").textContent = S.recaidas.length;
+  const perdido = S.recaidas.reduce((a,r)=> a + (r.monto||0), 0);
+  $("h-perdido").textContent = dinero(perdido);
+  $("rec-lista").innerHTML = S.recaidas.length
+    ? S.recaidas.map(r => `<div class="rec-item">
+        <div style="flex:1">
+          <div class="rec-fecha">${new Date(r.fecha).toLocaleString("es",{dateStyle:"medium",timeStyle:"short"})} · llevabas ${r.rachaDias} día${r.rachaDias===1?"":"s"}</div>
+          ${r.nota ? `<div class="rec-nota">${esc(r.nota)}</div>` : ""}
+        </div>
+        <div class="rec-monto">−${dinero(r.monto||0)}</div>
+      </div>`).join("")
+    : '<div class="meta-lista-vacia">Ninguna. ¡Sigue así! 💪</div>';
+}
+
+/* ================= metas ================= */
+function agregarMeta(){
+  const nombre = $("meta-nombre").value.trim();
+  const costo = parseFloat($("meta-costo").value);
+  if(!nombre || !(costo > 0)){ toast("Escribe la meta y su costo 🙂"); return; }
+  S.metas = S.metas || [];
+  S.metas.push({nombre, costo});
+  guardar();
+  $("meta-nombre").value = ""; $("meta-costo").value = "";
+  pintarMetas();
+  toast("Meta agregada 🎯");
+}
+function quitarMeta(i){ S.metas.splice(i,1); guardar(); pintarMetas(); }
+function pintarMetas(){
+  const disponible = ahorro(msRacha()) + (S.ahorroPrevio||0);
+  const metas = S.metas || [];
+  $("metas-lista").innerHTML = metas.length
+    ? metas.map((m,i) => {
+        const pct = Math.min(100, disponible/m.costo*100);
+        return `<div class="meta-item">
+          <div class="meta-top">
+            <span class="meta-nombre">${pct>=100?"✅ ":""}${esc(m.nombre)}</span>
+            <span class="meta-monto">${dinero(Math.min(disponible,m.costo))} / ${dinero(m.costo)}
+              <button class="x-btn" onclick="quitarMeta(${i})">✕</button></span>
+          </div>
+          <div class="barra"><div style="width:${pct}%"></div></div>
+        </div>`;
+      }).join("")
+    : '<div class="meta-lista-vacia">Aún no tienes metas. Agrega la primera 👇</div>';
+}
+
+/* ================= ajustes ================= */
+function pintarAjustes(){
+  $("aj-gasto").value = S.gastoSemanal || "";
+  $("aj-moneda").value = S.moneda || "$";
+  $("aj-fecha").value = fechaLocalInput(S.inicio);
+  pintarAjChips();
+}
+function pintarAjChips(){
+  $("aj-chips").innerHTML = S.razones.map((r,i)=>
+    `<span class="chip">${esc(r)}<button class="x-btn" onclick="quitarRazon(${i})">✕</button></span>`).join("");
+}
+function ajAgregarRazon(){
+  const v = $("aj-razon").value.trim();
+  if(!v) return;
+  S.razones.push(v); $("aj-razon").value = "";
+  guardar(); pintarAjChips(); pintarRazones();
+}
+function quitarRazon(i){ S.razones.splice(i,1); guardar(); pintarAjChips(); pintarRazones(); }
+function guardarAjustes(){
+  S.gastoSemanal = parseFloat($("aj-gasto").value) || 0;
+  S.moneda = $("aj-moneda").value;
+  const f = $("aj-fecha").value;
+  if(f) S.inicio = new Date(f).toISOString();
+  guardar(); tick();
+  toast("Cambios guardados ✓");
+}
+function borrarTodo(){
+  if(!confirm("¿Seguro? Se borrará todo tu progreso de este teléfono.")) return;
+  if(!confirm("Última confirmación: esto no se puede deshacer.")) return;
+  localStorage.removeItem(CLAVE);
+  location.reload();
+}
+
+/* ================= arranque ================= */
+function montarApp(){
+  $("onb").classList.remove("activa");
+  $("tabbar").style.display = "block";
+  const ms = msRacha();
+  HITOS.forEach(h => { if(ms >= h.d*86400000) hitosAvisados.add(h.d); });
+  pintarRazones();
+  irA("inicio");
+  tick();
+}
+cargar();
+if(S && S.inicio){
+  montarApp();
+}else{
+  $("onb").classList.add("activa");
+  $("onb-fecha").value = fechaLocalInput(new Date());
+}
+setInterval(tick, 1000);
+</script>
+</body>
+</html>
