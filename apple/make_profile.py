@@ -30,18 +30,13 @@ def load_domains() -> list[str]:
 
 
 def blacklist_xml(domains: list[str]) -> str:
+    # BlacklistedURLs es un arreglo de CADENAS (URLs), no de diccionarios.
+    # iOS rechaza el perfil ("The field BlacklistedURLs is invalid") si se
+    # usan <dict><key>URL</key>...</dict> aquí.
     items = []
     for d in domains:
-        items.append(
-            "                <dict>\n"
-            f"                    <key>URL</key><string>https://{d}</string>\n"
-            "                </dict>"
-        )
-        items.append(
-            "                <dict>\n"
-            f"                    <key>URL</key><string>https://www.{d}</string>\n"
-            "                </dict>"
-        )
+        items.append(f"                <string>https://{d}</string>")
+        items.append(f"                <string>https://www.{d}</string>")
     return "\n".join(items)
 
 
@@ -62,7 +57,7 @@ def build(domains: list[str]) -> str:
             <key>PayloadUUID</key><string>{payload_uuid}</string>
             <key>PayloadDisplayName</key><string>Filtro de apuestas</string>
             <key>FilterType</key><string>BuiltIn</string>
-            <key>AutoFilterEnabled</key><false/>
+            <key>AutoFilterEnabled</key><true/>
             <key>BlacklistedURLs</key>
             <array>
 {blacklist_xml(domains)}
