@@ -153,8 +153,14 @@
   .card h3 { font-size: 1.35rem; margin: 16px 0 6px; }
   .card .tag { font-size: 12.5px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--dawn-deep); }
   .card p { color: var(--muted); font-size: 15.5px; flex: 1; }
-  .card .plat-cta { margin-top: 18px; font-weight: 600; color: var(--teal); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
-  .card .plat-cta:hover { gap: 10px; }
+  .card .plat-cta { margin-top: 18px; font-weight: 700; color: #fff; background: var(--teal); text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 12px 16px; border-radius: 12px; text-align: center; }
+  .card .plat-cta:hover { background: var(--teal-deep); gap: 10px; }
+  .card .plat-help { margin-top: 10px; font-size: 13.5px; font-weight: 500; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+  .card .plat-help:hover { color: var(--teal); }
+  .card.is-you { border-color: var(--teal); box-shadow: 0 0 0 2px var(--teal), var(--shadow); }
+  .card .you-badge { display: none; align-self: flex-start; margin-top: 12px; font-size: 12px; font-weight: 700; color: #fff; background: var(--teal); border-radius: 999px; padding: 3px 10px; letter-spacing: .02em; }
+  .card.is-you .you-badge { display: inline-block; }
+  .cta-note { margin-top: 12px; font-size: 14px; color: var(--muted); }
 
   .worldwide {
     margin-top: 28px; background: linear-gradient(120deg, color-mix(in srgb, var(--teal) 12%, var(--card)), var(--card));
@@ -229,9 +235,10 @@
           <p class="lede reveal d2" data-i18n="hero_lede">Una app que bloquea las casas de apuestas en tu celular y tu computadora. Sin VPN, y diseñada para ser muy difícil de desactivar en un impulso.</p>
           <p class="reassure reveal d2" data-i18n="hero_reassure">No estás solo. El impulso pasa.</p>
           <div class="cta-row reveal d3">
-            <a class="btn btn-primary" href="#dispositivos" data-i18n="hero_cta1">Elegir mi dispositivo</a>
+            <a class="btn btn-primary" id="heroCta" href="#dispositivos">Elegir mi dispositivo</a>
             <a class="btn btn-ghost" href="#ayuda" data-i18n="hero_cta2">Buscar ayuda</a>
           </div>
+          <p class="cta-note" id="heroNote" hidden></p>
           <div class="stats reveal d3">
             <div class="stat"><div class="n">244+</div><div class="l" data-i18n="stat1">casas bloqueadas</div></div>
             <div class="stat"><div class="n">3</div><div class="l" data-i18n="stat2">plataformas</div></div>
@@ -276,26 +283,29 @@
         <h2 data-i18n="dev_title">Elige el tuyo. Los tres sin VPN.</h2>
       </div>
       <div class="cards">
-        <div class="card">
+        <div class="card" id="card-android">
           <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h10a2 2 0 012 2v16a2 2 0 01-2 2H7a2 2 0 01-2-2V4a2 2 0 012-2zm5 18a1 1 0 100-2 1 1 0 000 2zM8 4v13h8V4H8z"/></svg>
           <span class="tag">Android</span>
           <h3 data-i18n="and_t">Bloqueo profundo</h3>
           <p data-i18n="and_p">Se integra al sistema con Accesibilidad y Administrador de dispositivo. Bloquea apps y webs de apuestas y se defiende de que la desinstalen sin la contraseña.</p>
-          <a class="plat-cta" href="https://github.com/jonathanguindi/sinapuestas/tree/main/android" target="_blank" rel="noopener" data-i18n="and_cta">Instalar en Android →</a>
+          <a class="plat-cta" href="https://github.com/jonathanguindi/sinapuestas/releases/latest/download/SinApuestas.apk" data-i18n="and_cta">Descargar la app (APK) →</a>
+          <a class="plat-help" href="https://github.com/jonathanguindi/sinapuestas/tree/main/android" target="_blank" rel="noopener" data-i18n="and_help">Cómo instalarla</a>
         </div>
-        <div class="card">
+        <div class="card" id="card-ios">
           <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.9c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.8-3-.8-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .7 1.1 1.6 2.3 2.7 2.2 1.1 0 1.5-.7 2.8-.7 1.3 0 1.6.7 2.8.7 1.2 0 1.9-1.1 2.6-2.1.8-1.2 1.2-2.3 1.2-2.4-.1 0-2.3-.9-2.3-3.5zM14.2 5.9c.6-.7 1-1.8.9-2.9-.9 0-2 .6-2.6 1.4-.6.6-1 1.7-.9 2.7 1 .1 2-.5 2.6-1.2z"/></svg>
           <span class="tag">iPhone · iPad</span>
           <h3 data-i18n="ios_t">Con Screen Time de Apple</h3>
           <p data-i18n="ios_p">Un perfil filtra los sitios de apuestas en todo el sistema y una app usa Tiempo en Pantalla. Con el código en manos de otra persona, muy difícil de saltar.</p>
-          <a class="plat-cta" href="https://github.com/jonathanguindi/sinapuestas/tree/main/apple" target="_blank" rel="noopener" data-i18n="ios_cta">Instalar en iPhone →</a>
+          <a class="plat-cta" href="apple/SinApuestas.mobileconfig" data-i18n="ios_cta">Instalar el perfil de bloqueo →</a>
+          <a class="plat-help" href="https://github.com/jonathanguindi/sinapuestas/tree/main/apple" target="_blank" rel="noopener" data-i18n="ios_help">Cómo activarlo (Tiempo en Pantalla)</a>
         </div>
-        <div class="card">
+        <div class="card" id="card-desktop">
           <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 4h18a1 1 0 011 1v11a1 1 0 01-1 1h-7v2h3v2H6v-2h3v-2H3a1 1 0 01-1-1V5a1 1 0 011-1zm1 2v9h16V6H4z"/></svg>
           <span class="tag">Windows · Mac · Linux</span>
           <h3 data-i18n="pc_t">También en la compu</h3>
           <p data-i18n="pc_p">Bloquea los sitios con un vigilante que se repara solo si alguien lo toca. Arranca con el sistema y pide la contraseña para detenerse.</p>
-          <a class="plat-cta" href="https://github.com/jonathanguindi/sinapuestas/tree/main/desktop" target="_blank" rel="noopener" data-i18n="pc_cta">Instalar en la compu →</a>
+          <a class="plat-cta" href="https://github.com/jonathanguindi/sinapuestas/releases/latest/download/SinApuestas-Computadora.zip" data-i18n="pc_cta">Descargar el instalador →</a>
+          <a class="plat-help" href="https://github.com/jonathanguindi/sinapuestas/tree/main/desktop" target="_blank" rel="noopener" data-i18n="pc_help">Cómo instalarlo</a>
         </div>
       </div>
       <div class="worldwide">
@@ -360,9 +370,14 @@
       step2_t: "Un período de compromiso", step2_p: "Eliges 7, 30, 90 días o un año. Ese tiempo es tu promesa contigo mismo.",
       step3_t: "No se puede acortar", step3_p: "Durante el compromiso, ni con la contraseña se puede desactivar. El impulso choca con una pared.",
       dev_eyebrow: "En todos tus dispositivos", dev_title: "Elige el tuyo. Los tres sin VPN.",
-      and_t: "Bloqueo profundo", and_p: "Se integra al sistema con Accesibilidad y Administrador de dispositivo. Bloquea apps y webs de apuestas y se defiende de que la desinstalen sin la contraseña.", and_cta: "Instalar en Android →",
-      ios_t: "Con Screen Time de Apple", ios_p: "Un perfil filtra los sitios de apuestas en todo el sistema y una app usa Tiempo en Pantalla. Con el código en manos de otra persona, muy difícil de saltar.", ios_cta: "Instalar en iPhone →",
-      pc_t: "También en la compu", pc_p: "Bloquea los sitios con un vigilante que se repara solo si alguien lo toca. Arranca con el sistema y pide la contraseña para detenerse.", pc_cta: "Instalar en la compu →",
+      and_t: "Bloqueo profundo", and_p: "Se integra al sistema con Accesibilidad y Administrador de dispositivo. Bloquea apps y webs de apuestas y se defiende de que la desinstalen sin la contraseña.", and_cta: "Descargar la app (APK) →", and_help: "Cómo instalarla",
+      ios_t: "Con Screen Time de Apple", ios_p: "Un perfil filtra los sitios de apuestas en todo el sistema y una app usa Tiempo en Pantalla. Con el código en manos de otra persona, muy difícil de saltar.", ios_cta: "Instalar el perfil de bloqueo →", ios_help: "Cómo activarlo (Tiempo en Pantalla)",
+      pc_t: "También en la compu", pc_p: "Bloquea los sitios con un vigilante que se repara solo si alguien lo toca. Arranca con el sistema y pide la contraseña para detenerse.", pc_cta: "Descargar el instalador →", pc_help: "Cómo instalarlo",
+      you_badge: "Tu dispositivo",
+      cta_ios: "Bloquear mi iPhone", cta_android: "Descargar para Android", cta_desktop: "Descargar para la compu", cta_generic: "Elegir mi dispositivo",
+      note_ios: "Se instala como perfil en Ajustes. Luego pon un código de Tiempo en Pantalla (mejor si lo escribe otra persona).",
+      note_android: "Descarga el APK; tu teléfono te pedirá permitir instalar apps de esta fuente.",
+      note_desktop: "Descarga el instalador y ábrelo; pedirá permisos de administrador una vez.",
       world_p: "<strong>Bloqueo mundial.</strong> Cientos de casas de apuestas de todos los continentes, más una capa de palabras clave (casino, apuesta, poker, ruleta…) que atrapa también las nuevas y las que no están en la lista.",
       honesty_eyebrow: "Sin humo", honesty_title: "Lo que sí hace, y lo que no.",
       honesty1: "Ninguna app puede cerrar tus cuentas de apuestas: eso se hace con la autoexclusión, directo con el operador.",
@@ -392,9 +407,14 @@
       step2_t: "A commitment period", step2_p: "You pick 7, 30, 90 days or a year. That time is your promise to yourself.",
       step3_t: "It can't be shortened", step3_p: "During the commitment, not even the password can turn it off. The urge hits a wall.",
       dev_eyebrow: "On all your devices", dev_title: "Pick yours. All three, no VPN.",
-      and_t: "Deep blocking", and_p: "Integrates with the system through Accessibility and Device Admin. Blocks betting apps and sites and defends itself from being uninstalled without the password.", and_cta: "Install on Android →",
-      ios_t: "Powered by Apple Screen Time", ios_p: "A profile filters betting sites system-wide and an app uses Screen Time. With the passcode held by someone else, it's very hard to bypass.", ios_cta: "Install on iPhone →",
-      pc_t: "On your computer too", pc_p: "Blocks the sites with a watchdog that repairs itself if tampered with. Starts with the system and needs the password to stop.", pc_cta: "Install on desktop →",
+      and_t: "Deep blocking", and_p: "Integrates with the system through Accessibility and Device Admin. Blocks betting apps and sites and defends itself from being uninstalled without the password.", and_cta: "Download the app (APK) →", and_help: "How to install it",
+      ios_t: "Powered by Apple Screen Time", ios_p: "A profile filters betting sites system-wide and an app uses Screen Time. With the passcode held by someone else, it's very hard to bypass.", ios_cta: "Install the blocking profile →", ios_help: "How to turn it on (Screen Time)",
+      pc_t: "On your computer too", pc_p: "Blocks the sites with a watchdog that repairs itself if tampered with. Starts with the system and needs the password to stop.", pc_cta: "Download the installer →", pc_help: "How to install it",
+      you_badge: "Your device",
+      cta_ios: "Block my iPhone", cta_android: "Download for Android", cta_desktop: "Download for computer", cta_generic: "Choose my device",
+      note_ios: "Installs as a profile in Settings. Then set a Screen Time passcode (better if someone else types it).",
+      note_android: "Download the APK; your phone will ask you to allow installing apps from this source.",
+      note_desktop: "Download the installer and open it; it asks for administrator permission once.",
       world_p: "<strong>Worldwide blocking.</strong> Hundreds of betting sites from every continent, plus a keyword layer (casino, betting, poker, roulette…) that also catches new ones and any not on the list.",
       honesty_eyebrow: "No smoke", honesty_title: "What it does — and what it doesn't.",
       honesty1: "No app can close your betting accounts: that's done through self-exclusion, directly with the operator.",
@@ -424,9 +444,14 @@
       step2_t: "Um período de compromisso", step2_p: "Você escolhe 7, 30, 90 dias ou um ano. Esse tempo é a sua promessa consigo mesmo.",
       step3_t: "Não dá para encurtar", step3_p: "Durante o compromisso, nem com a senha dá para desativar. A vontade bate numa parede.",
       dev_eyebrow: "Em todos os seus aparelhos", dev_title: "Escolha o seu. Os três sem VPN.",
-      and_t: "Bloqueio profundo", and_p: "Integra-se ao sistema com Acessibilidade e Administrador do dispositivo. Bloqueia apps e sites de apostas e se defende de ser desinstalado sem a senha.", and_cta: "Instalar no Android →",
-      ios_t: "Com o Tempo de Uso da Apple", ios_p: "Um perfil filtra os sites de apostas em todo o sistema e um app usa o Tempo de Uso. Com a senha nas mãos de outra pessoa, é muito difícil burlar.", ios_cta: "Instalar no iPhone →",
-      pc_t: "No computador também", pc_p: "Bloqueia os sites com um vigia que se repara sozinho se alguém mexer. Inicia com o sistema e pede a senha para parar.", pc_cta: "Instalar no computador →",
+      and_t: "Bloqueio profundo", and_p: "Integra-se ao sistema com Acessibilidade e Administrador do dispositivo. Bloqueia apps e sites de apostas e se defende de ser desinstalado sem a senha.", and_cta: "Baixar o app (APK) →", and_help: "Como instalar",
+      ios_t: "Com o Tempo de Uso da Apple", ios_p: "Um perfil filtra os sites de apostas em todo o sistema e um app usa o Tempo de Uso. Com a senha nas mãos de outra pessoa, é muito difícil burlar.", ios_cta: "Instalar o perfil de bloqueio →", ios_help: "Como ativar (Tempo de Uso)",
+      pc_t: "No computador também", pc_p: "Bloqueia os sites com um vigia que se repara sozinho se alguém mexer. Inicia com o sistema e pede a senha para parar.", pc_cta: "Baixar o instalador →", pc_help: "Como instalar",
+      you_badge: "Seu aparelho",
+      cta_ios: "Bloquear meu iPhone", cta_android: "Baixar para Android", cta_desktop: "Baixar para o computador", cta_generic: "Escolher meu aparelho",
+      note_ios: "Instala como perfil em Ajustes. Depois coloque uma senha do Tempo de Uso (melhor se outra pessoa digitar).",
+      note_android: "Baixe o APK; seu celular vai pedir para permitir instalar apps desta fonte.",
+      note_desktop: "Baixe o instalador e abra; ele pede permissão de administrador uma vez.",
       world_p: "<strong>Bloqueio mundial.</strong> Centenas de casas de apostas de todos os continentes, mais uma camada de palavras-chave (casino, aposta, poker, roleta…) que pega também as novas e as que não estão na lista.",
       honesty_eyebrow: "Sem enrolação", honesty_title: "O que ele faz — e o que não faz.",
       honesty1: "Nenhum app fecha suas contas de apostas: isso é feito com a autoexclusão, direto com o operador.",
@@ -452,7 +477,47 @@
     });
     document.querySelectorAll(".langs button").forEach(b =>
       b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+    applyDeviceCta(dict);
     try { localStorage.setItem("sinapuestas_lang", lang); } catch (e) {}
+  }
+
+  const DL = {
+    android: "https://github.com/jonathanguindi/sinapuestas/releases/latest/download/SinApuestas.apk",
+    desktop: "https://github.com/jonathanguindi/sinapuestas/releases/latest/download/SinApuestas-Computadora.zip",
+    ios: "apple/SinApuestas.mobileconfig"
+  };
+
+  function detectOS() {
+    const ua = (navigator.userAgent || "").toLowerCase();
+    const touchMac = navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
+    if (/iphone|ipad|ipod/.test(ua) || touchMac) return "ios";
+    if (/android/.test(ua)) return "android";
+    return "desktop";
+  }
+
+  function applyDeviceCta(dict) {
+    const os = detectOS();
+    const cta = document.getElementById("heroCta");
+    const note = document.getElementById("heroNote");
+    const map = { ios: "card-ios", android: "card-android", desktop: "card-desktop" };
+    const label = { ios: dict.cta_ios, android: dict.cta_android, desktop: dict.cta_desktop };
+
+    if (cta) { cta.href = DL[os]; cta.textContent = label[os] || dict.cta_generic; }
+    if (note) { note.textContent = dict["note_" + os] || ""; note.hidden = !note.textContent; }
+
+    document.querySelectorAll(".card").forEach(c => {
+      c.classList.remove("is-you");
+      const b = c.querySelector(".you-badge");
+      if (b) b.remove();
+    });
+    const card = document.getElementById(map[os]);
+    if (card) {
+      card.classList.add("is-you");
+      const badge = document.createElement("span");
+      badge.className = "you-badge";
+      badge.textContent = dict.you_badge;
+      card.insertBefore(badge, card.querySelector(".plat-cta"));
+    }
   }
 
   document.querySelectorAll(".langs button").forEach(b =>
