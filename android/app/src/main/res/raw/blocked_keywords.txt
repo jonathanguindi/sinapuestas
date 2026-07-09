@@ -1,0 +1,41 @@
+# PALABRAS CLAVE para atrapar casas de apuestas que NO esten en la lista de
+# dominios (casas nuevas, pequenas o de cualquier pais). Si el nombre de
+# paquete de una app, o una direccion web (URL), CONTIENE alguna de estas
+# palabras, se bloquea.
+#
+# Se eligieron terminos muy asociados a apuestas para evitar bloquear cosas
+# que no son. Una palabra por linea; comentarios con #.
+
+apuesta
+apuestas
+apostar
+casadeapuestas
+sportsbook
+sportbet
+sportybet
+betting
+gambling
+casino
+casinos
+onlinecasino
+poker
+pokerstars
+ruleta
+roulette
+blackjack
+baccarat
+tragamonedas
+tragaperras
+slots
+freeslots
+bingo
+jackpot
+lottery
+loteria
+sportsbet
+sportbetting
+wager
+bookmaker
+betano
+1xbet
+betway

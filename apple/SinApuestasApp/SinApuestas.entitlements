@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Permiso especial de Apple para usar Family Controls / Screen Time.
+         Se solicita en: https://developer.apple.com/contact/request/family-controls-distribution
+         En desarrollo/depuracion funciona sin aprobacion; para publicar en la
+         App Store hace falta que Apple lo conceda. -->
+    <key>com.apple.developer.family-controls</key>
+    <true/>
+</dict>
+</plist>

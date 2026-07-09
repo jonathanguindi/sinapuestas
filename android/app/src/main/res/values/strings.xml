@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SinApuestas</string>
+
+    <string name="main_title">Bloqueo de apuestas</string>
+    <string name="main_description">Esta app se integra al sistema del teléfono para bloquear las apps y los sitios web de apuestas. No usa VPN. Pon una contraseña (idealmente que la guarde otra persona de confianza), elige por cuánto tiempo te comprometes, aprueba los dos permisos y listo: bloquea todo.</string>
+
+    <string name="password_hint">Contraseña de custodio</string>
+    <string name="password_confirm_hint">Repite la contraseña</string>
+
+    <string name="duration_label">Período de compromiso (no se puede desactivar antes)</string>
+    <string name="duration_7">7 días</string>
+    <string name="duration_30">30 días</string>
+    <string name="duration_90">90 días</string>
+    <string name="duration_365">1 año</string>
+
+    <string name="btn_activate">Activar y pedir permisos</string>
+    <string name="perm_accessibility">1) Dar permiso de Accesibilidad</string>
+    <string name="perm_accessibility_ok">✓ Accesibilidad activada</string>
+    <string name="perm_admin">2) Dar permiso de Administrador</string>
+    <string name="perm_admin_ok">✓ Administrador activado</string>
+    <string name="btn_unlock">Desbloquear (con contraseña)</string>
+    <string name="btn_help">Buscar ayuda para dejar de apostar</string>
+
+    <string name="status_off">Sin configurar</string>
+    <string name="status_need_permissions">Configurado. Falta aprobar los permisos.</string>
+    <string name="status_partial">Casi listo: falta un permiso por aprobar.</string>
+    <string name="status_full">Protección activa 🛡️ — todo bloqueado</string>
+    <string name="status_full_days">Protección activa 🛡️ — %1$d días de compromiso restantes</string>
+
+    <string name="hint_accessibility">Busca «SinApuestas» en la lista, ábrelo y actívalo. Sirve para bloquear apps y webs de apuestas.</string>
+    <string name="accessibility_service_label">SinApuestas — bloqueo de apuestas</string>
+    <string name="accessibility_service_description">Detecta cuándo se abre una app o web de apuestas y la bloquea. También evita que la protección se desactive sin la contraseña. No lee ni guarda el contenido de otras apps.</string>
+
+    <string name="admin_explanation">Al activar el administrador, la app no se puede desinstalar sin desactivarlo primero, y eso pide la contraseña. Así es mucho más difícil quitar el bloqueo en un impulso.</string>
+    <string name="admin_disable_warning">Si desactivas el administrador, se podrá desinstalar SinApuestas y perderás el bloqueo de apuestas.</string>
+    <string name="admin_already">El administrador ya está activo.</string>
+
+    <string name="err_password_short">La contraseña debe tener al menos 4 caracteres.</string>
+    <string name="err_password_mismatch">Las contraseñas no coinciden.</string>
+    <string name="protection_configured">Contraseña guardada. Ahora aprueba los permisos.</string>
+    <string name="protection_ready">¡Listo! Protección activa. 💪</string>
+
+    <string name="blocked_title">Apuestas bloqueadas</string>
+    <string name="blocked_subtitle">Tú decidiste protegerte. Respira: el impulso pasa en unos minutos.</string>
+    <string name="blocked_subtitle_days">Tú decidiste protegerte durante %1$d días más. Respira: el impulso pasa.</string>
+    <string name="btn_go_home">Volver al inicio</string>
+
+    <string name="unlock_title">Desbloquear protección</string>
+    <string name="unlock_info_label">Ingresa la contraseña de custodio</string>
+    <string name="unlock_password_hint">Contraseña</string>
+    <string name="btn_confirm_unlock">Desbloquear</string>
+    <string name="unlock_free">El período de compromiso ya terminó. Con la contraseña puedes desactivar la protección.</string>
+    <string name="unlock_committed">Compromiso activo: faltan %1$d días. Ni con la contraseña se puede desactivar antes.</string>
+    <string name="unlock_wrong">Contraseña incorrecta.</string>
+    <string name="unlock_still_committed">Aún faltan %1$d días de tu compromiso. Ánimo, vas bien. 💪</string>
+    <string name="unlock_done">Protección desactivada. Ya puedes desinstalar si lo necesitas.</string>
+</resources>
