@@ -12,14 +12,17 @@ custodio** y que haya terminado el **período de compromiso**.
 
 ## Instalar
 
+**macOS (fácil, con doble clic)**: haz doble clic en
+`Instalar SinApuestas (Mac).command`. Si la Mac dice que no puede abrirlo
+porque es de un "desarrollador no identificado", haz **clic derecho → Abrir →
+Abrir** (solo la primera vez). O desde la Terminal:
+```bash
+sudo bash install_macos.sh
+```
+
 **Windows** — abre PowerShell **como administrador**:
 ```powershell
 powershell -ExecutionPolicy Bypass -File install_windows.ps1
-```
-
-**macOS**:
-```bash
-sudo bash install_macos.sh
 ```
 
 **Linux**:
