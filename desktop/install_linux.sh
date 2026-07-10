@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 # Instala SinApuestas como servicio systemd en Linux.
+#
+# Copia el bloqueador y las listas a una carpeta protegida (solo root) y
+# registra el servicio desde ahí. Así nadie puede vaciar la lista de dominios
+# ni editar el código sin sudo.
+#
 # Uso:  sudo bash install_linux.sh
 set -e
 
@@ -8,11 +13,26 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-DIR="$(cd "$(dirname "$0")" && pwd)"
-PY="$(command -v python3)"
+SRC="$(cd "$(dirname "$0")" && pwd)"
+APP="/opt/sinapuestas"
+PY="/usr/bin/python3"
+
+if [ ! -x "$PY" ]; then
+  echo "No se encontró $PY. Instala Python 3 con tu gestor de paquetes."
+  exit 1
+fi
+
+echo "== Copiando SinApuestas a la carpeta protegida =="
+mkdir -p "$APP"
+for f in blocker.py domains.txt extra_domains.txt update_worldwide.py README.md; do
+  [ -f "$SRC/$f" ] && cp "$SRC/$f" "$APP/"
+done
+chown -R root:root "$APP"
+chmod 755 "$APP"
+chmod 644 "$APP"/*
 
 echo "== Configurando SinApuestas =="
-"$PY" "$DIR/blocker.py" setup
+"$PY" "$APP/blocker.py" setup
 
 cat > /etc/systemd/system/sinapuestas.service <<EOF
 [Unit]
@@ -21,7 +41,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=$PY $DIR/blocker.py run
+ExecStart=$PY $APP/blocker.py run
 Restart=always
 RestartSec=2
 
@@ -30,8 +50,9 @@ WantedBy=multi-user.target
 EOF
 
 systemctl daemon-reload
-systemctl enable --now sinapuestas.service
+systemctl enable sinapuestas.service
+systemctl restart sinapuestas.service
 echo
-echo "✓ Servicio instalado y activo. Estado:  python3 $DIR/blocker.py status"
-echo "Para desactivar (tras el compromiso):  sudo python3 $DIR/blocker.py stop"
+echo "✓ Servicio instalado y activo. Estado:  python3 $APP/blocker.py status"
+echo "Para desactivar (tras el compromiso):  sudo python3 $APP/blocker.py stop"
 echo "y luego:  sudo systemctl disable --now sinapuestas.service"

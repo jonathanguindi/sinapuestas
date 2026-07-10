@@ -27,14 +27,19 @@ sudo bash install_macos.sh
 sudo bash install_linux.sh
 ```
 
-El instalador te pide una contraseña (idealmente la escribe otra persona) y los
-días de compromiso, aplica el bloqueo y registra el servicio para que arranque
-solo con el sistema.
+El instalador copia el bloqueador y las listas a una **carpeta protegida** que
+solo un administrador puede modificar (macOS: `/Library/Application
+Support/SinApuestas`, Linux: `/opt/sinapuestas`, Windows:
+`C:\ProgramData\SinApuestas`), te pide una contraseña (idealmente la escribe
+otra persona) y los días de compromiso, aplica el bloqueo y registra el
+servicio desde esa carpeta para que arranque solo con el sistema. Después de
+instalar puedes borrar la carpeta descargada: el servicio ya no depende de ella.
 
 ## Comandos útiles
+Usa la ruta de la carpeta protegida de tu sistema, por ejemplo en macOS:
 ```bash
-python3 blocker.py status   # ver estado
-sudo python3 blocker.py stop   # desactivar (pide contraseña; respeta el compromiso)
+python3 "/Library/Application Support/SinApuestas/blocker.py" status   # ver estado
+sudo python3 "/Library/Application Support/SinApuestas/blocker.py" stop   # desactivar (pide contraseña; respeta el compromiso)
 ```
 
 ## Cómo hacerlo lo más difícil de saltar
@@ -52,5 +57,5 @@ sudo python3 blocker.py stop   # desactivar (pide contraseña; respeta el compro
   `hosts`. Por eso la contraseña de un tercero y una cuenta sin admin son clave.
 - No bloquea apps de escritorio dedicadas que no usen estos dominios (la mayoría
   de casas de apuestas en compu se usan por navegador, así que quedan cubiertas).
-- Bloquea por dominio: agrega los que falten en `domains.txt` y corre
-  `sudo python3 blocker.py apply`.
+- Bloquea por dominio: agrega los que falten en el `domains.txt` de la carpeta
+  protegida (con sudo/administrador) y corre `sudo python3 blocker.py apply`.
