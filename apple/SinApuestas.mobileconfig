@@ -9,7 +9,7 @@
             <key>PayloadType</key><string>com.apple.webcontent-filter</string>
             <key>PayloadVersion</key><integer>1</integer>
             <key>PayloadIdentifier</key><string>com.sinapuestas.webfilter</string>
-            <key>PayloadUUID</key><string>78C15598-8814-4A29-8BE8-B62864AEFD8A</string>
+            <key>PayloadUUID</key><string>6972FAA9-4EA4-47C8-BD56-BB3C263F1EDD</string>
             <key>PayloadDisplayName</key><string>Filtro de apuestas</string>
             <key>FilterType</key><string>BuiltIn</string>
             <key>AutoFilterEnabled</key><true/>
@@ -537,6 +537,10 @@
                 <string>https://www.staketr.com</string>
                 <string>https://stake.game</string>
                 <string>https://www.stake.game</string>
+                <string>https://bigbet.pa</string>
+                <string>https://www.bigbet.pa</string>
+                <string>https://bigbet.casino</string>
+                <string>https://www.bigbet.casino</string>
             </array>
         </dict>
     </array>
@@ -544,7 +548,7 @@
     <key>PayloadDescription</key><string>Bloquea los sitios de apuestas en Safari sin usar VPN. Para maxima proteccion, instalalo en un dispositivo supervisado o con un codigo de Tiempo en Pantalla que guarde otra persona.</string>
     <key>PayloadIdentifier</key><string>com.sinapuestas.profile</string>
     <key>PayloadType</key><string>Configuration</string>
-    <key>PayloadUUID</key><string>53B6B509-D26A-4D16-9FC7-758875B9EC06</string>
+    <key>PayloadUUID</key><string>E2A719BA-298C-4CFA-B5A4-B7B68FF2FBE3</string>
     <key>PayloadVersion</key><integer>1</integer>
     <key>PayloadRemovalDisallowed</key><true/>
 </dict>
