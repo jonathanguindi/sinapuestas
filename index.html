@@ -374,10 +374,11 @@
       ios_t: "Con Screen Time de Apple", ios_p: "Un perfil filtra los sitios de apuestas en todo el sistema y una app usa Tiempo en Pantalla. Con el código en manos de otra persona, muy difícil de saltar.", ios_cta: "Instalar el perfil de bloqueo →", ios_help: "Cómo activarlo (Tiempo en Pantalla)",
       pc_t: "También en la compu", pc_p: "Bloquea los sitios con un vigilante que se repara solo si alguien lo toca. Arranca con el sistema y pide la contraseña para detenerse.", pc_cta: "Descargar el instalador →", pc_help: "Cómo instalarlo",
       you_badge: "Tu dispositivo",
-      cta_ios: "Bloquear mi iPhone", cta_android: "Descargar para Android", cta_desktop: "Descargar para la compu", cta_generic: "Elegir mi dispositivo",
+      cta_ios: "Bloquear mi iPhone", cta_android: "Descargar para Android", cta_desktop: "Descargar para la compu", cta_mac: "Descargar para Mac", cta_generic: "Elegir mi dispositivo",
       note_ios: "Se instala como perfil en Ajustes. Luego pon un código de Tiempo en Pantalla (mejor si lo escribe otra persona).",
       note_android: "Descarga el APK; tu teléfono te pedirá permitir instalar apps de esta fuente.",
       note_desktop: "Descarga el instalador y ábrelo; pedirá permisos de administrador una vez.",
+      note_mac: "Se baja la app. Ábrela con doble clic. La primera vez: clic derecho sobre SinApuestas → Abrir.",
       world_p: "<strong>Bloqueo mundial.</strong> Cientos de casas de apuestas de todos los continentes, más una capa de palabras clave (casino, apuesta, poker, ruleta…) que atrapa también las nuevas y las que no están en la lista.",
       honesty_eyebrow: "Sin humo", honesty_title: "Lo que sí hace, y lo que no.",
       honesty1: "Ninguna app puede cerrar tus cuentas de apuestas: eso se hace con la autoexclusión, directo con el operador.",
@@ -411,10 +412,11 @@
       ios_t: "Powered by Apple Screen Time", ios_p: "A profile filters betting sites system-wide and an app uses Screen Time. With the passcode held by someone else, it's very hard to bypass.", ios_cta: "Install the blocking profile →", ios_help: "How to turn it on (Screen Time)",
       pc_t: "On your computer too", pc_p: "Blocks the sites with a watchdog that repairs itself if tampered with. Starts with the system and needs the password to stop.", pc_cta: "Download the installer →", pc_help: "How to install it",
       you_badge: "Your device",
-      cta_ios: "Block my iPhone", cta_android: "Download for Android", cta_desktop: "Download for computer", cta_generic: "Choose my device",
+      cta_ios: "Block my iPhone", cta_android: "Download for Android", cta_desktop: "Download for computer", cta_mac: "Download for Mac", cta_generic: "Choose my device",
       note_ios: "Installs as a profile in Settings. Then set a Screen Time passcode (better if someone else types it).",
       note_android: "Download the APK; your phone will ask you to allow installing apps from this source.",
       note_desktop: "Download the installer and open it; it asks for administrator permission once.",
+      note_mac: "The app downloads. Open it with a double-click. First time: right-click SinApuestas → Open.",
       world_p: "<strong>Worldwide blocking.</strong> Hundreds of betting sites from every continent, plus a keyword layer (casino, betting, poker, roulette…) that also catches new ones and any not on the list.",
       honesty_eyebrow: "No smoke", honesty_title: "What it does — and what it doesn't.",
       honesty1: "No app can close your betting accounts: that's done through self-exclusion, directly with the operator.",
@@ -448,10 +450,11 @@
       ios_t: "Com o Tempo de Uso da Apple", ios_p: "Um perfil filtra os sites de apostas em todo o sistema e um app usa o Tempo de Uso. Com a senha nas mãos de outra pessoa, é muito difícil burlar.", ios_cta: "Instalar o perfil de bloqueio →", ios_help: "Como ativar (Tempo de Uso)",
       pc_t: "No computador também", pc_p: "Bloqueia os sites com um vigia que se repara sozinho se alguém mexer. Inicia com o sistema e pede a senha para parar.", pc_cta: "Baixar o instalador →", pc_help: "Como instalar",
       you_badge: "Seu aparelho",
-      cta_ios: "Bloquear meu iPhone", cta_android: "Baixar para Android", cta_desktop: "Baixar para o computador", cta_generic: "Escolher meu aparelho",
+      cta_ios: "Bloquear meu iPhone", cta_android: "Baixar para Android", cta_desktop: "Baixar para o computador", cta_mac: "Baixar para Mac", cta_generic: "Escolher meu aparelho",
       note_ios: "Instala como perfil em Ajustes. Depois coloque uma senha do Tempo de Uso (melhor se outra pessoa digitar).",
       note_android: "Baixe o APK; seu celular vai pedir para permitir instalar apps desta fonte.",
       note_desktop: "Baixe o instalador e abra; ele pede permissão de administrador uma vez.",
+      note_mac: "O app baixa. Abra com dois cliques. Na primeira vez: clique direito em SinApuestas → Abrir.",
       world_p: "<strong>Bloqueio mundial.</strong> Centenas de casas de apostas de todos os continentes, mais uma camada de palavras-chave (casino, aposta, poker, roleta…) que pega também as novas e as que não estão na lista.",
       honesty_eyebrow: "Sem enrolação", honesty_title: "O que ele faz — e o que não faz.",
       honesty1: "Nenhum app fecha suas contas de apostas: isso é feito com a autoexclusão, direto com o operador.",
@@ -484,6 +487,7 @@
   const DL = {
     android: "https://github.com/jonathanguindi/sinapuestas/releases/latest/download/SinApuestas.apk",
     desktop: "./SinApuestas-Computadora.zip",
+    mac: "./SinApuestas-Mac.zip",
     ios: "apple/SinApuestas.mobileconfig"
   };
 
@@ -492,6 +496,7 @@
     const touchMac = navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
     if (/iphone|ipad|ipod/.test(ua) || touchMac) return "ios";
     if (/android/.test(ua)) return "android";
+    if (/macintosh|mac os x/.test(ua)) return "mac";
     return "desktop";
   }
 
@@ -499,10 +504,16 @@
     const os = detectOS();
     const cta = document.getElementById("heroCta");
     const note = document.getElementById("heroNote");
-    const map = { ios: "card-ios", android: "card-android", desktop: "card-desktop" };
-    const label = { ios: dict.cta_ios, android: dict.cta_android, desktop: dict.cta_desktop };
+    const map = { ios: "card-ios", android: "card-android", desktop: "card-desktop", mac: "card-desktop" };
+    const label = { ios: dict.cta_ios, android: dict.cta_android, desktop: dict.cta_desktop, mac: dict.cta_mac };
 
     if (cta) { cta.href = DL[os]; cta.textContent = label[os] || dict.cta_generic; }
+
+    // En Mac, el botón de la tarjeta "compu" también baja SOLO la app (nada de scripts).
+    if (os === "mac") {
+      const dc = document.querySelector("#card-desktop .plat-cta");
+      if (dc) { dc.href = DL.mac; dc.textContent = dict.cta_mac + " →"; }
+    }
     if (note) { note.textContent = dict["note_" + os] || ""; note.hidden = !note.textContent; }
 
     document.querySelectorAll(".card").forEach(c => {
