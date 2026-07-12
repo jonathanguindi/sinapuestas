@@ -262,3 +262,21 @@ pointsbetau.com.au
 bluebet.com.au
 lottoland.com
 sportbet.one
+
+# --- Panama (operadores) y espejos de Stake ---
+sportium.pa
+betcha.pa
+starplay.pa
+starplaycasino.com
+leon.bet
+leonbet.com
+stake.pet
+stake.krd
+stake.ac
+stake.mba
+stake.jp
+stake.bz
+stake.ceo
+stake.bet.br
+staketr.com
+stake.game
