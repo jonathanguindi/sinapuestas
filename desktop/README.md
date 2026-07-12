@@ -6,48 +6,42 @@ mandan a "ninguna parte"), y un **vigilante** que corre como servicio repara el
 archivo si alguien lo borra. Para desactivarlo hace falta la **contraseña de
 custodio** y que haya terminado el **período de compromiso**.
 
-## Requisitos
-- Python 3.9 o más nuevo.
-- Permisos de administrador (para escribir en `hosts` e instalar el servicio).
-
 ## Instalar
 
-**macOS (fácil, con doble clic)**: haz doble clic en
-`Instalar SinApuestas (Mac).command`. Si la Mac dice que no puede abrirlo
-porque es de un "desarrollador no identificado", haz **clic derecho → Abrir →
-Abrir** (solo la primera vez). O desde la Terminal:
-```bash
-sudo bash install_macos.sh
-```
+### macOS — con la app (sin Terminal)
+Haz **doble clic en `SinApuestas.app`**. Se abre una ventana donde pones la
+contraseña de custodio y los días; luego macOS te pide **una vez** tu
+contraseña de administrador (el cuadro normal del sistema) y listo.
 
-**Windows** — abre PowerShell **como administrador**:
+La primera vez, como la app no está firmada por Apple, macOS puede decir que
+es de un "desarrollador no identificado": haz **clic derecho sobre
+`SinApuestas.app` → Abrir → Abrir** (solo esa primera vez).
+
+Para ver el estado o desactivar (cuando termine el compromiso), vuelve a abrir
+la misma app.
+
+### Windows — PowerShell como administrador
 ```powershell
 powershell -ExecutionPolicy Bypass -File install_windows.ps1
 ```
+Requiere Python (instálalo desde python.org marcando "Install for all users").
 
-**Linux**:
+### Linux
 ```bash
 sudo bash install_linux.sh
 ```
+Requiere Python 3.
 
-El instalador copia el bloqueador y las listas a una **carpeta protegida** que
-solo un administrador puede modificar (macOS: `/Library/Application
-Support/SinApuestas`, Linux: `/opt/sinapuestas`, Windows:
-`C:\ProgramData\SinApuestas`), te pide una contraseña (idealmente la escribe
-otra persona) y los días de compromiso, aplica el bloqueo y registra el
-servicio desde esa carpeta para que arranque solo con el sistema. Después de
-instalar puedes borrar la carpeta descargada: el servicio ya no depende de ella.
-
-## Comandos útiles
-Usa la ruta de la carpeta protegida de tu sistema, por ejemplo en macOS:
-```bash
-python3 "/Library/Application Support/SinApuestas/blocker.py" status   # ver estado
-sudo python3 "/Library/Application Support/SinApuestas/blocker.py" stop   # desactivar (pide contraseña; respeta el compromiso)
-```
+En los tres casos, el instalador copia el bloqueador y las listas a una
+**carpeta protegida** que solo un administrador puede modificar (macOS:
+`/Library/Application Support/SinApuestas`, Linux: `/opt/sinapuestas`, Windows:
+`C:\ProgramData\SinApuestas`), guarda tu contraseña como hash con sal, aplica el
+bloqueo y registra el servicio para que arranque solo con el sistema. Después
+puedes borrar la carpeta descargada: el servicio ya no depende de ella.
 
 ## Cómo hacerlo lo más difícil de saltar
-- Que **otra persona** ponga la contraseña y no te la diga hasta terminar el
-  compromiso.
+- Que **otra persona** ponga la contraseña de custodio y no te la diga hasta
+  terminar el compromiso.
 - Usa un período largo (30, 90 días o un año).
 - Usa una cuenta de usuario **sin permisos de administrador** en tu día a día:
   así no puedes editar `hosts` ni parar el servicio tú mismo.
@@ -60,5 +54,13 @@ sudo python3 "/Library/Application Support/SinApuestas/blocker.py" stop   # desa
   `hosts`. Por eso la contraseña de un tercero y una cuenta sin admin son clave.
 - No bloquea apps de escritorio dedicadas que no usen estos dominios (la mayoría
   de casas de apuestas en compu se usan por navegador, así que quedan cubiertas).
-- Bloquea por dominio: agrega los que falten en el `domains.txt` de la carpeta
-  protegida (con sudo/administrador) y corre `sudo python3 blocker.py apply`.
+- El compromiso se mide con el reloj del sistema: adelantar mucho la fecha puede
+  vencerlo antes.
+
+## Para desarrolladores
+- `blocker.sh` — motor del bloqueo en bash (macOS/Linux): `apply` / `run` /
+  `status` / `stop`.
+- `blocker.py` — equivalente en Python que usan los instaladores de Windows y
+  Linux por scripts.
+- `SinApuestas.applescript` + `install-app.sh` + `build_mac_app.sh` — fuente de
+  la app de Mac. Reconstruir con `bash build_mac_app.sh` en una Mac.
