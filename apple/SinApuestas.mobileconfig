@@ -9,7 +9,7 @@
             <key>PayloadType</key><string>com.apple.webcontent-filter</string>
             <key>PayloadVersion</key><integer>1</integer>
             <key>PayloadIdentifier</key><string>com.sinapuestas.webfilter</string>
-            <key>PayloadUUID</key><string>4A6806A8-7981-47B1-B3D3-0D97B46A0901</string>
+            <key>PayloadUUID</key><string>C4AC6DD6-ACD2-4DF4-8087-B0DE88643A30</string>
             <key>PayloadDisplayName</key><string>Filtro de apuestas</string>
             <key>FilterType</key><string>BuiltIn</string>
             <key>AutoFilterEnabled</key><true/>
@@ -561,6 +561,56 @@
                 <string>https://www.betano.com</string>
                 <string>https://strendus.mx</string>
                 <string>https://www.strendus.mx</string>
+                <string>https://betsson.mx</string>
+                <string>https://www.betsson.mx</string>
+                <string>https://winpot.mx</string>
+                <string>https://www.winpot.mx</string>
+                <string>https://bigbola.mx</string>
+                <string>https://www.bigbola.mx</string>
+                <string>https://bigbola.com.mx</string>
+                <string>https://www.bigbola.com.mx</string>
+                <string>https://betway.mx</string>
+                <string>https://www.betway.mx</string>
+                <string>https://melbet.mx</string>
+                <string>https://www.melbet.mx</string>
+                <string>https://pinnacle.mx</string>
+                <string>https://www.pinnacle.mx</string>
+                <string>https://dafabet.mx</string>
+                <string>https://www.dafabet.mx</string>
+                <string>https://22bet.mx</string>
+                <string>https://www.22bet.mx</string>
+                <string>https://sportsbet.mx</string>
+                <string>https://www.sportsbet.mx</string>
+                <string>https://betcris.mx</string>
+                <string>https://www.betcris.mx</string>
+                <string>https://betmexico.mx</string>
+                <string>https://www.betmexico.mx</string>
+                <string>https://retabet.mx</string>
+                <string>https://www.retabet.mx</string>
+                <string>https://jackpotcity.mx</string>
+                <string>https://www.jackpotcity.mx</string>
+                <string>https://casinolife.mx</string>
+                <string>https://www.casinolife.mx</string>
+                <string>https://caliente.com.mx</string>
+                <string>https://www.caliente.com.mx</string>
+                <string>https://codere.com.mx</string>
+                <string>https://www.codere.com.mx</string>
+                <string>https://ganabet.com.mx</string>
+                <string>https://www.ganabet.com.mx</string>
+                <string>https://winpot.com.mx</string>
+                <string>https://www.winpot.com.mx</string>
+                <string>https://playdoit.com.mx</string>
+                <string>https://www.playdoit.com.mx</string>
+                <string>https://sportium.mx</string>
+                <string>https://www.sportium.mx</string>
+                <string>https://novibet.mx</string>
+                <string>https://www.novibet.mx</string>
+                <string>https://pokerstars.mx</string>
+                <string>https://www.pokerstars.mx</string>
+                <string>https://888sport.mx</string>
+                <string>https://www.888sport.mx</string>
+                <string>https://williamhill.mx</string>
+                <string>https://www.williamhill.mx</string>
             </array>
         </dict>
     </array>
@@ -568,7 +618,7 @@
     <key>PayloadDescription</key><string>Bloquea los sitios de apuestas en Safari sin usar VPN. Para maxima proteccion, instalalo en un dispositivo supervisado o con un codigo de Tiempo en Pantalla que guarde otra persona.</string>
     <key>PayloadIdentifier</key><string>com.sinapuestas.profile</string>
     <key>PayloadType</key><string>Configuration</string>
-    <key>PayloadUUID</key><string>61AF8107-842C-4B6F-8D64-48A430EF1259</string>
+    <key>PayloadUUID</key><string>16CB9E04-FAF4-42BA-B427-06E138E360DB</string>
     <key>PayloadVersion</key><integer>1</integer>
     <key>PayloadRemovalDisallowed</key><true/>
 </dict>
