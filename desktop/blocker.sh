@@ -86,9 +86,11 @@ remove_block() {
   flush_dns
 }
 
-# Carga el estado no secreto (PROTECTION_ON, LOCK_UNTIL).
+# Carga el estado no secreto (PROTECTION_ON, LOCK_UNTIL, MODE).
+# MODE=custodio → se quita con contraseña al terminar el compromiso.
+# MODE=aleatorio → código secreto que nadie tiene; se libera solo al terminar.
 load_state() {
-  PROTECTION_ON=0; LOCK_UNTIL=0
+  PROTECTION_ON=0; LOCK_UNTIL=0; MODE=custodio
   [ -f "$APP/state" ] && . "$APP/state"
 }
 
@@ -126,28 +128,47 @@ cmd_status() {
     echo "Estado: ACTIVO (reaplicando…)"
   fi
   echo "Dominios bloqueados: $(load_domains | wc -l | tr -d ' ')"
+  echo "Modo: ${MODE:-custodio}"
   if commitment_active; then
     echo "Compromiso: faltan $(remaining_days) días (no se puede desactivar antes)."
   else
-    echo "Compromiso: cumplido. Se puede desactivar con la contraseña."
+    echo "Compromiso: cumplido. Se puede desactivar."
   fi
 }
 
+disable_now() {
+  {
+    echo "PROTECTION_ON=0"
+    echo "LOCK_UNTIL=$LOCK_UNTIL"
+    echo "MODE=$MODE"
+  } > "$APP/state"
+  remove_block
+  echo "DESACTIVADO"
+}
+
 cmd_stop() {
-  local pwfile="${1:-}" salt hash try
+  local pwfile="${1:-}" try
   load_state
   [ "${PROTECTION_ON:-0}" = "1" ] || { echo "Ya está desactivado."; exit 0; }
+
+  # Durante el compromiso NUNCA se puede quitar, en ningún modo.
+  if commitment_active; then echo "COMPROMISO_ACTIVO:$(remaining_days)"; exit 3; fi
+
+  # Modo código aleatorio: nadie tiene la clave. Cumplido el compromiso, se
+  # libera solo (sin contraseña).
+  if [ "${MODE:-custodio}" = "aleatorio" ]; then
+    disable_now
+    return
+  fi
+
+  # Modo custodio: exige la contraseña correcta.
   [ -f "$pwfile" ] || { echo "Falta la contraseña."; exit 1; }
   [ -f "$APP/secret" ] || { echo "No hay configuración."; exit 1; }
   . "$APP/secret"   # define SALT y HASH
   try="$( { printf '%s' "$SALT"; cat "$pwfile"; } | shasum -a 256 | awk '{print $1}' )"
   rm -f "$pwfile"
   if [ "$try" != "$HASH" ]; then echo "CONTRASEÑA_INCORRECTA"; exit 2; fi
-  if commitment_active; then echo "COMPROMISO_ACTIVO:$(remaining_days)"; exit 3; fi
-  echo "PROTECTION_ON=0" > "$APP/state"
-  echo "LOCK_UNTIL=$LOCK_UNTIL" >> "$APP/state"
-  remove_block
-  echo "DESACTIVADO"
+  disable_now
 }
 
 case "${1:-status}" in

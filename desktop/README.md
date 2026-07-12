@@ -9,9 +9,19 @@ custodio** y que haya terminado el **período de compromiso**.
 ## Instalar
 
 ### macOS — con la app (sin Terminal)
-Haz **doble clic en `SinApuestas.app`**. Se abre una ventana donde pones la
-contraseña de custodio y los días; luego macOS te pide **una vez** tu
-contraseña de administrador (el cuadro normal del sistema) y listo.
+Haz **doble clic en `SinApuestas.app`**. La app te muestra primero una pantalla
+donde aceptas que, durante el tiempo elegido, será imposible quitarlo. Luego
+eliges:
+
+- **Código secreto automático (recomendado):** la app genera una clave al azar
+  que **nadie verá** y la descarta. El candado no se puede abrir en un impulso;
+  se libera **solo** cuando termina el tiempo que elegiste.
+- **Que otra persona ponga la clave:** un tercero de confianza escribe una
+  contraseña y podría abrirlo antes solo con ella (siempre respetando el
+  período de compromiso).
+
+Después eliges la duración (7, 30, 90 días o 1 año) y macOS te pide **una vez**
+tu contraseña de administrador (el cuadro normal del sistema). Listo.
 
 La primera vez, como la app no está firmada por Apple, macOS puede decir que
 es de un "desarrollador no identificado": haz **clic derecho sobre

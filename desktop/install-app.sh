@@ -2,20 +2,25 @@
 # Instalador privilegiado que ejecuta la app SinApuestas.app con permisos de
 # administrador (vía el cuadro nativo de macOS). No se usa desde la Terminal.
 #
-#   install-app.sh <carpeta_recursos> <archivo_contraseña> <días>
+#   install-app.sh <carpeta_recursos> <archivo_contraseña|EMPTY> <días> <modo>
 #
-# Copia el bloqueador y las listas a una carpeta solo-administrador, guarda la
-# contraseña (como hash con sal), aplica el bloqueo y registra el vigilante como
-# demonio launchd. La contraseña llega en un archivo (nunca como argumento, para
-# que no aparezca en la lista de procesos).
+# modo = custodio  → la contraseña viene en <archivo_contraseña>.
+# modo = aleatorio → se genera un código secreto aquí y se descarta; nadie lo
+#                    tendrá, así el candado no se puede quitar en un impulso.
+#
+# Copia el bloqueador y las listas a una carpeta solo-administrador, guarda el
+# hash con sal, aplica el bloqueo y registra el vigilante como demonio launchd.
+# La contraseña (modo custodio) llega en un archivo, nunca como argumento, para
+# que no aparezca en la lista de procesos.
 set -eu
 
-RES="$1"; PWFILE="$2"; DAYS="$3"
+RES="$1"; PWFILE="$2"; DAYS="$3"; MODE="${4:-custodio}"
 APP="/Library/Application Support/SinApuestas"
 LABEL="com.sinapuestas.blocker"
 PLIST="/Library/LaunchDaemons/$LABEL.plist"
 
 case "$DAYS" in ''|*[!0-9]*) DAYS=30 ;; esac
+case "$MODE" in aleatorio|custodio) ;; *) MODE=custodio ;; esac
 
 # Carpeta protegida, limpia.
 rm -rf "$APP"
@@ -30,8 +35,14 @@ chmod 644 "$APP/domains.txt"
 
 # Contraseña: sal aleatoria + hash. El texto plano llega por stdin (no en args).
 SALT="$(openssl rand -hex 16)"
-HASH="$( { printf '%s' "$SALT"; cat "$PWFILE"; } | shasum -a 256 | awk '{print $1}' )"
-rm -f "$PWFILE"
+if [ "$MODE" = "aleatorio" ]; then
+  # Código secreto generado aquí y descartado: nadie lo verá jamás.
+  HASH="$( { printf '%s' "$SALT"; openssl rand -hex 32; } | shasum -a 256 | awk '{print $1}' )"
+  [ -f "$PWFILE" ] && rm -f "$PWFILE"
+else
+  HASH="$( { printf '%s' "$SALT"; cat "$PWFILE"; } | shasum -a 256 | awk '{print $1}' )"
+  rm -f "$PWFILE"
+fi
 
 NOW="$(date +%s)"
 LOCK=$(( NOW + DAYS * 86400 ))
@@ -40,6 +51,7 @@ LOCK=$(( NOW + DAYS * 86400 ))
 cat > "$APP/state" <<EOF
 PROTECTION_ON=1
 LOCK_UNTIL=$LOCK
+MODE=$MODE
 EOF
 chmod 644 "$APP/state"
 
