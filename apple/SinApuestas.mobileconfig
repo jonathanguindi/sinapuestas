@@ -9,7 +9,7 @@
             <key>PayloadType</key><string>com.apple.webcontent-filter</string>
             <key>PayloadVersion</key><integer>1</integer>
             <key>PayloadIdentifier</key><string>com.sinapuestas.webfilter</string>
-            <key>PayloadUUID</key><string>51218178-9F9B-4A5D-8240-EBD0420278F5</string>
+            <key>PayloadUUID</key><string>AAB15915-45A9-47E8-8508-55F743708B5C</string>
             <key>PayloadDisplayName</key><string>Filtro de apuestas</string>
             <key>FilterType</key><string>BuiltIn</string>
             <key>AutoFilterEnabled</key><true/>
@@ -503,6 +503,8 @@
                 <string>https://www.bluebet.com.au</string>
                 <string>https://lottoland.com</string>
                 <string>https://www.lottoland.com</string>
+                <string>https://sportbet.one</string>
+                <string>https://www.sportbet.one</string>
             </array>
         </dict>
     </array>
@@ -510,7 +512,7 @@
     <key>PayloadDescription</key><string>Bloquea los sitios de apuestas en Safari sin usar VPN. Para maxima proteccion, instalalo en un dispositivo supervisado o con un codigo de Tiempo en Pantalla que guarde otra persona.</string>
     <key>PayloadIdentifier</key><string>com.sinapuestas.profile</string>
     <key>PayloadType</key><string>Configuration</string>
-    <key>PayloadUUID</key><string>38E58D5A-4E4B-49F4-BB1A-62B140AA44D1</string>
+    <key>PayloadUUID</key><string>2FD27CA3-AF5C-4E74-BA99-2EC02441C331</string>
     <key>PayloadVersion</key><integer>1</integer>
     <key>PayloadRemovalDisallowed</key><true/>
 </dict>
