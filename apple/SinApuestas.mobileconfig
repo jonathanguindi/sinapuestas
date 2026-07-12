@@ -9,7 +9,7 @@
             <key>PayloadType</key><string>com.apple.webcontent-filter</string>
             <key>PayloadVersion</key><integer>1</integer>
             <key>PayloadIdentifier</key><string>com.sinapuestas.webfilter</string>
-            <key>PayloadUUID</key><string>784B0524-F913-438D-9592-CBA00E30C184</string>
+            <key>PayloadUUID</key><string>FCD58C21-B98E-44E1-BB0F-C25A64BE06B6</string>
             <key>PayloadDisplayName</key><string>Filtro de apuestas</string>
             <key>FilterType</key><string>BuiltIn</string>
             <key>AutoFilterEnabled</key><true/>
@@ -659,6 +659,90 @@
                 <string>https://www.winclub.co</string>
                 <string>https://betcris.co</string>
                 <string>https://www.betcris.co</string>
+                <string>https://teapuesto.pe</string>
+                <string>https://www.teapuesto.pe</string>
+                <string>https://betano.pe</string>
+                <string>https://www.betano.pe</string>
+                <string>https://doradobet.pe</string>
+                <string>https://www.doradobet.pe</string>
+                <string>https://meridianbet.pe</string>
+                <string>https://www.meridianbet.pe</string>
+                <string>https://coolbet.pe</string>
+                <string>https://www.coolbet.pe</string>
+                <string>https://bet365.pe</string>
+                <string>https://www.bet365.pe</string>
+                <string>https://1xbet.pe</string>
+                <string>https://www.1xbet.pe</string>
+                <string>https://betsafe.pe</string>
+                <string>https://www.betsafe.pe</string>
+                <string>https://solbet.pe</string>
+                <string>https://www.solbet.pe</string>
+                <string>https://rushbet.pe</string>
+                <string>https://www.rushbet.pe</string>
+                <string>https://pinnacle.pe</string>
+                <string>https://www.pinnacle.pe</string>
+                <string>https://apuestatotal.com</string>
+                <string>https://www.apuestatotal.com</string>
+                <string>https://betsson.cl</string>
+                <string>https://www.betsson.cl</string>
+                <string>https://coolbet.cl</string>
+                <string>https://www.coolbet.cl</string>
+                <string>https://jugabet.cl</string>
+                <string>https://www.jugabet.cl</string>
+                <string>https://latamwin.cl</string>
+                <string>https://www.latamwin.cl</string>
+                <string>https://1xbet.cl</string>
+                <string>https://www.1xbet.cl</string>
+                <string>https://marathonbet.cl</string>
+                <string>https://www.marathonbet.cl</string>
+                <string>https://pin-up.cl</string>
+                <string>https://www.pin-up.cl</string>
+                <string>https://luckia.cl</string>
+                <string>https://www.luckia.cl</string>
+                <string>https://betsala.cl</string>
+                <string>https://www.betsala.cl</string>
+                <string>https://winnercasino.cl</string>
+                <string>https://www.winnercasino.cl</string>
+                <string>https://bplay.bet.ar</string>
+                <string>https://www.bplay.bet.ar</string>
+                <string>https://betwarrior.bet.ar</string>
+                <string>https://www.betwarrior.bet.ar</string>
+                <string>https://betsson.bet.ar</string>
+                <string>https://www.betsson.bet.ar</string>
+                <string>https://codere.bet.ar</string>
+                <string>https://www.codere.bet.ar</string>
+                <string>https://betano.bet.ar</string>
+                <string>https://www.betano.bet.ar</string>
+                <string>https://bet365.bet.ar</string>
+                <string>https://www.bet365.bet.ar</string>
+                <string>https://retabet.es</string>
+                <string>https://www.retabet.es</string>
+                <string>https://888.es</string>
+                <string>https://www.888.es</string>
+                <string>https://888sport.es</string>
+                <string>https://www.888sport.es</string>
+                <string>https://marcaapuestas.es</string>
+                <string>https://www.marcaapuestas.es</string>
+                <string>https://kirolbet.es</string>
+                <string>https://www.kirolbet.es</string>
+                <string>https://paf.es</string>
+                <string>https://www.paf.es</string>
+                <string>https://betway.es</string>
+                <string>https://www.betway.es</string>
+                <string>https://casumo.es</string>
+                <string>https://www.casumo.es</string>
+                <string>https://interwetten.es</string>
+                <string>https://www.interwetten.es</string>
+                <string>https://goldenpark.es</string>
+                <string>https://www.goldenpark.es</string>
+                <string>https://yobingo.es</string>
+                <string>https://www.yobingo.es</string>
+                <string>https://botemania.es</string>
+                <string>https://www.botemania.es</string>
+                <string>https://granmadrid.es</string>
+                <string>https://www.granmadrid.es</string>
+                <string>https://wanabet.es</string>
+                <string>https://www.wanabet.es</string>
             </array>
         </dict>
     </array>
@@ -666,7 +750,7 @@
     <key>PayloadDescription</key><string>Bloquea los sitios de apuestas en Safari sin usar VPN. Para maxima proteccion, instalalo en un dispositivo supervisado o con un codigo de Tiempo en Pantalla que guarde otra persona.</string>
     <key>PayloadIdentifier</key><string>com.sinapuestas.profile</string>
     <key>PayloadType</key><string>Configuration</string>
-    <key>PayloadUUID</key><string>D1F48D9D-5EF6-446B-8671-DBCD76659F03</string>
+    <key>PayloadUUID</key><string>781A41ED-B775-4263-AA60-0B293A0505A9</string>
     <key>PayloadVersion</key><integer>1</integer>
     <key>PayloadRemovalDisallowed</key><true/>
 </dict>

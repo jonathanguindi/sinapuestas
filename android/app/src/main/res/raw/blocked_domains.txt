@@ -345,3 +345,53 @@ sportsbet.co
 apuestas.co
 winclub.co
 betcris.co
+
+# --- Peru (MINCETUR) ---
+teapuesto.pe
+betano.pe
+doradobet.pe
+meridianbet.pe
+coolbet.pe
+bet365.pe
+1xbet.pe
+betsafe.pe
+solbet.pe
+rushbet.pe
+pinnacle.pe
+apuestatotal.com
+
+# --- Chile ---
+betsson.cl
+coolbet.cl
+jugabet.cl
+latamwin.cl
+1xbet.cl
+marathonbet.cl
+pin-up.cl
+luckia.cl
+betsala.cl
+winnercasino.cl
+
+# --- Argentina ---
+bplay.bet.ar
+betwarrior.bet.ar
+betsson.bet.ar
+codere.bet.ar
+betano.bet.ar
+bet365.bet.ar
+
+# --- Espana (DGOJ) ---
+retabet.es
+888.es
+888sport.es
+marcaapuestas.es
+kirolbet.es
+paf.es
+betway.es
+casumo.es
+interwetten.es
+goldenpark.es
+yobingo.es
+botemania.es
+granmadrid.es
+wanabet.es
