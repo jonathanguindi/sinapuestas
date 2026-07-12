@@ -9,7 +9,7 @@
             <key>PayloadType</key><string>com.apple.webcontent-filter</string>
             <key>PayloadVersion</key><integer>1</integer>
             <key>PayloadIdentifier</key><string>com.sinapuestas.webfilter</string>
-            <key>PayloadUUID</key><string>C4AC6DD6-ACD2-4DF4-8087-B0DE88643A30</string>
+            <key>PayloadUUID</key><string>784B0524-F913-438D-9592-CBA00E30C184</string>
             <key>PayloadDisplayName</key><string>Filtro de apuestas</string>
             <key>FilterType</key><string>BuiltIn</string>
             <key>AutoFilterEnabled</key><true/>
@@ -611,6 +611,54 @@
                 <string>https://www.888sport.mx</string>
                 <string>https://williamhill.mx</string>
                 <string>https://www.williamhill.mx</string>
+                <string>https://betsson.co</string>
+                <string>https://www.betsson.co</string>
+                <string>https://codere.com.co</string>
+                <string>https://www.codere.com.co</string>
+                <string>https://sportium.com.co</string>
+                <string>https://www.sportium.com.co</string>
+                <string>https://rivalo.co</string>
+                <string>https://www.rivalo.co</string>
+                <string>https://bwin.co</string>
+                <string>https://www.bwin.co</string>
+                <string>https://stake.com.co</string>
+                <string>https://www.stake.com.co</string>
+                <string>https://betano.co</string>
+                <string>https://www.betano.co</string>
+                <string>https://mryoker.co</string>
+                <string>https://www.mryoker.co</string>
+                <string>https://megapuesta.com</string>
+                <string>https://www.megapuesta.com</string>
+                <string>https://megapuesta.co</string>
+                <string>https://www.megapuesta.co</string>
+                <string>https://aquijuego.co</string>
+                <string>https://www.aquijuego.co</string>
+                <string>https://betfair.co</string>
+                <string>https://www.betfair.co</string>
+                <string>https://stake.co</string>
+                <string>https://www.stake.co</string>
+                <string>https://pixbet.co</string>
+                <string>https://www.pixbet.co</string>
+                <string>https://retabet.co</string>
+                <string>https://www.retabet.co</string>
+                <string>https://betjuego.co</string>
+                <string>https://www.betjuego.co</string>
+                <string>https://casino.co</string>
+                <string>https://www.casino.co</string>
+                <string>https://pin-up.co</string>
+                <string>https://www.pin-up.co</string>
+                <string>https://pinup.co</string>
+                <string>https://www.pinup.co</string>
+                <string>https://betmania.co</string>
+                <string>https://www.betmania.co</string>
+                <string>https://sportsbet.co</string>
+                <string>https://www.sportsbet.co</string>
+                <string>https://apuestas.co</string>
+                <string>https://www.apuestas.co</string>
+                <string>https://winclub.co</string>
+                <string>https://www.winclub.co</string>
+                <string>https://betcris.co</string>
+                <string>https://www.betcris.co</string>
             </array>
         </dict>
     </array>
@@ -618,7 +666,7 @@
     <key>PayloadDescription</key><string>Bloquea los sitios de apuestas en Safari sin usar VPN. Para maxima proteccion, instalalo en un dispositivo supervisado o con un codigo de Tiempo en Pantalla que guarde otra persona.</string>
     <key>PayloadIdentifier</key><string>com.sinapuestas.profile</string>
     <key>PayloadType</key><string>Configuration</string>
-    <key>PayloadUUID</key><string>16CB9E04-FAF4-42BA-B427-06E138E360DB</string>
+    <key>PayloadUUID</key><string>D1F48D9D-5EF6-446B-8671-DBCD76659F03</string>
     <key>PayloadVersion</key><integer>1</integer>
     <key>PayloadRemovalDisallowed</key><true/>
 </dict>
