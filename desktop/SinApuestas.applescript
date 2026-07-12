@@ -9,6 +9,11 @@ on resourcesDir()
 	return do shell script "dirname " & quoted form of p
 end resourcesDir
 
+-- Ícono del escudo de SinApuestas para las ventanas.
+on brandIcon()
+	return (path to resource "applet.icns")
+end brandIcon
+
 -- Lee el estado sin pedir contraseña. Devuelve {installed, daysLeft, mode}.
 on readState()
 	set out to do shell script "cat " & quoted form of (appDir & "/state") & " 2>/dev/null || true"
@@ -35,7 +40,7 @@ on writePasswordTemp(pw)
 end writePasswordTemp
 
 on askPassword(prompt)
-	set d to display dialog prompt default answer "" with hidden answer buttons {"Cancelar", "Continuar"} default button "Continuar" with title "SinApuestas"
+	set d to display dialog prompt default answer "" with hidden answer buttons {"Cancelar", "Continuar"} default button "Continuar" with title "SinApuestas" with icon (brandIcon())
 	return text returned of d
 end askPassword
 
@@ -93,7 +98,7 @@ on doInstall()
 		error "No se pudo instalar: " & errMsg
 	end try
 
-	display dialog "✓ Candado activo 🛡️" & return & return & "Las casas de apuestas quedaron bloqueadas por " & (daysNum as text) & " días, y el vigilante arranca solo cada vez que prendes la computadora." & return & return & "¡Vas a lograrlo! 💚" buttons {"Cerrar"} default button "Cerrar" with title "SinApuestas" with icon note
+	display dialog "✓ Candado activo 🛡️" & return & return & "Las casas de apuestas quedaron bloqueadas por " & (daysNum as text) & " días, y el vigilante arranca solo cada vez que prendes la computadora." & return & return & "¡Vas a lograrlo! 💚" buttons {"Cerrar"} default button "Cerrar" with title "SinApuestas" with icon (brandIcon())
 end doInstall
 
 on doDeactivate(theMode)
@@ -129,9 +134,9 @@ on run
 			set daysLeft to item 2 of theState
 			set theMode to item 3 of theState
 			if daysLeft > 0 then
-				display dialog "Estado: ACTIVO 🛡️" & return & "Faltan " & (daysLeft as text) & " días de tu compromiso (no se puede desactivar antes)." buttons {"Cerrar"} default button "Cerrar" with title "SinApuestas" with icon note
+				display dialog "Estado: ACTIVO 🛡️" & return & "Faltan " & (daysLeft as text) & " días de tu compromiso (no se puede desactivar antes)." buttons {"Cerrar"} default button "Cerrar" with title "SinApuestas" with icon (brandIcon())
 			else
-				set r to display dialog "Estado: ACTIVO 🛡️" & return & "Tu compromiso ya se cumplió. Puedes abrir el candado si quieres." buttons {"Cerrar", "Desactivar"} default button "Cerrar" with title "SinApuestas" with icon note
+				set r to display dialog "Estado: ACTIVO 🛡️" & return & "Tu compromiso ya se cumplió. Puedes abrir el candado si quieres." buttons {"Cerrar", "Desactivar"} default button "Cerrar" with title "SinApuestas" with icon (brandIcon())
 				if button returned of r is "Desactivar" then doDeactivate(theMode)
 			end if
 		else
