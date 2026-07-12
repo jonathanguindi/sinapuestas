@@ -9,7 +9,7 @@
             <key>PayloadType</key><string>com.apple.webcontent-filter</string>
             <key>PayloadVersion</key><integer>1</integer>
             <key>PayloadIdentifier</key><string>com.sinapuestas.webfilter</string>
-            <key>PayloadUUID</key><string>FCD58C21-B98E-44E1-BB0F-C25A64BE06B6</string>
+            <key>PayloadUUID</key><string>D8A36687-120F-4988-8DE9-5A2A94104F4E</string>
             <key>PayloadDisplayName</key><string>Filtro de apuestas</string>
             <key>FilterType</key><string>BuiltIn</string>
             <key>AutoFilterEnabled</key><true/>
@@ -743,6 +743,102 @@
                 <string>https://www.granmadrid.es</string>
                 <string>https://wanabet.es</string>
                 <string>https://www.wanabet.es</string>
+                <string>https://bet365.bet.br</string>
+                <string>https://www.bet365.bet.br</string>
+                <string>https://betfair.bet.br</string>
+                <string>https://www.betfair.bet.br</string>
+                <string>https://betsson.bet.br</string>
+                <string>https://www.betsson.bet.br</string>
+                <string>https://f12.bet.br</string>
+                <string>https://www.f12.bet.br</string>
+                <string>https://betpix365.bet.br</string>
+                <string>https://www.betpix365.bet.br</string>
+                <string>https://novibet.bet.br</string>
+                <string>https://www.novibet.bet.br</string>
+                <string>https://rivalo.bet.br</string>
+                <string>https://www.rivalo.bet.br</string>
+                <string>https://vaidebet.bet.br</string>
+                <string>https://www.vaidebet.bet.br</string>
+                <string>https://reidopitaco.bet.br</string>
+                <string>https://www.reidopitaco.bet.br</string>
+                <string>https://mcgames.bet.br</string>
+                <string>https://www.mcgames.bet.br</string>
+                <string>https://apostaganha.bet.br</string>
+                <string>https://www.apostaganha.bet.br</string>
+                <string>https://7games.bet.br</string>
+                <string>https://www.7games.bet.br</string>
+                <string>https://vera.bet.br</string>
+                <string>https://www.vera.bet.br</string>
+                <string>https://brbet.bet.br</string>
+                <string>https://www.brbet.bet.br</string>
+                <string>https://jogodeouro.bet.br</string>
+                <string>https://www.jogodeouro.bet.br</string>
+                <string>https://1xbet.bet.br</string>
+                <string>https://www.1xbet.bet.br</string>
+                <string>https://betwarrior.bet.br</string>
+                <string>https://www.betwarrior.bet.br</string>
+                <string>https://galera.bet.br</string>
+                <string>https://www.galera.bet.br</string>
+                <string>https://afun.bet.br</string>
+                <string>https://www.afun.bet.br</string>
+                <string>https://multibet.bet.br</string>
+                <string>https://www.multibet.bet.br</string>
+                <string>https://br4bet.bet.br</string>
+                <string>https://www.br4bet.bet.br</string>
+                <string>https://brazino777.bet.br</string>
+                <string>https://www.brazino777.bet.br</string>
+                <string>https://zeroumbet.bet.br</string>
+                <string>https://www.zeroumbet.bet.br</string>
+                <string>https://bandbet.bet.br</string>
+                <string>https://www.bandbet.bet.br</string>
+                <string>https://goldebet.bet.br</string>
+                <string>https://www.goldebet.bet.br</string>
+                <string>https://vbet.bet.br</string>
+                <string>https://www.vbet.bet.br</string>
+                <string>https://aposta1.bet.br</string>
+                <string>https://www.aposta1.bet.br</string>
+                <string>https://apostou.bet.br</string>
+                <string>https://www.apostou.bet.br</string>
+                <string>https://betao.bet.br</string>
+                <string>https://www.betao.bet.br</string>
+                <string>https://betboom.bet.br</string>
+                <string>https://www.betboom.bet.br</string>
+                <string>https://betdasorte.bet.br</string>
+                <string>https://www.betdasorte.bet.br</string>
+                <string>https://betesporte.bet.br</string>
+                <string>https://www.betesporte.bet.br</string>
+                <string>https://betfusion.bet.br</string>
+                <string>https://www.betfusion.bet.br</string>
+                <string>https://betgorillas.bet.br</string>
+                <string>https://www.betgorillas.bet.br</string>
+                <string>https://betmgm.bet.br</string>
+                <string>https://www.betmgm.bet.br</string>
+                <string>https://betou.bet.br</string>
+                <string>https://www.betou.bet.br</string>
+                <string>https://betvip.bet.br</string>
+                <string>https://www.betvip.bet.br</string>
+                <string>https://bullsbet.bet.br</string>
+                <string>https://www.bullsbet.bet.br</string>
+                <string>https://casadeapostas.bet.br</string>
+                <string>https://www.casadeapostas.bet.br</string>
+                <string>https://energia.bet.br</string>
+                <string>https://www.energia.bet.br</string>
+                <string>https://fulltbet.bet.br</string>
+                <string>https://www.fulltbet.bet.br</string>
+                <string>https://hanz.bet.br</string>
+                <string>https://www.hanz.bet.br</string>
+                <string>https://jonbet.bet.br</string>
+                <string>https://www.jonbet.bet.br</string>
+                <string>https://lottoland.bet.br</string>
+                <string>https://www.lottoland.bet.br</string>
+                <string>https://mrjack.bet.br</string>
+                <string>https://www.mrjack.bet.br</string>
+                <string>https://playuzu.bet.br</string>
+                <string>https://www.playuzu.bet.br</string>
+                <string>https://sortenabet.bet.br</string>
+                <string>https://www.sortenabet.bet.br</string>
+                <string>https://suprema.bet.br</string>
+                <string>https://www.suprema.bet.br</string>
             </array>
         </dict>
     </array>
@@ -750,7 +846,7 @@
     <key>PayloadDescription</key><string>Bloquea los sitios de apuestas en Safari sin usar VPN. Para maxima proteccion, instalalo en un dispositivo supervisado o con un codigo de Tiempo en Pantalla que guarde otra persona.</string>
     <key>PayloadIdentifier</key><string>com.sinapuestas.profile</string>
     <key>PayloadType</key><string>Configuration</string>
-    <key>PayloadUUID</key><string>781A41ED-B775-4263-AA60-0B293A0505A9</string>
+    <key>PayloadUUID</key><string>AC97658C-F613-4CAB-BBCE-63EC53BA6554</string>
     <key>PayloadVersion</key><integer>1</integer>
     <key>PayloadRemovalDisallowed</key><true/>
 </dict>
