@@ -9,7 +9,7 @@
             <key>PayloadType</key><string>com.apple.webcontent-filter</string>
             <key>PayloadVersion</key><integer>1</integer>
             <key>PayloadIdentifier</key><string>com.sinapuestas.webfilter</string>
-            <key>PayloadUUID</key><string>6972FAA9-4EA4-47C8-BD56-BB3C263F1EDD</string>
+            <key>PayloadUUID</key><string>4A6806A8-7981-47B1-B3D3-0D97B46A0901</string>
             <key>PayloadDisplayName</key><string>Filtro de apuestas</string>
             <key>FilterType</key><string>BuiltIn</string>
             <key>AutoFilterEnabled</key><true/>
@@ -541,6 +541,26 @@
                 <string>https://www.bigbet.pa</string>
                 <string>https://bigbet.casino</string>
                 <string>https://www.bigbet.casino</string>
+                <string>https://wplay.pa</string>
+                <string>https://www.wplay.pa</string>
+                <string>https://caliente.pa</string>
+                <string>https://www.caliente.pa</string>
+                <string>https://1xbet.pa</string>
+                <string>https://www.1xbet.pa</string>
+                <string>https://bet365.pa</string>
+                <string>https://www.bet365.pa</string>
+                <string>https://latinbet.pa</string>
+                <string>https://www.latinbet.pa</string>
+                <string>https://bwin.pa</string>
+                <string>https://www.bwin.pa</string>
+                <string>https://pokerstars.pa</string>
+                <string>https://www.pokerstars.pa</string>
+                <string>https://caliente.com</string>
+                <string>https://www.caliente.com</string>
+                <string>https://betano.com</string>
+                <string>https://www.betano.com</string>
+                <string>https://strendus.mx</string>
+                <string>https://www.strendus.mx</string>
             </array>
         </dict>
     </array>
@@ -548,7 +568,7 @@
     <key>PayloadDescription</key><string>Bloquea los sitios de apuestas en Safari sin usar VPN. Para maxima proteccion, instalalo en un dispositivo supervisado o con un codigo de Tiempo en Pantalla que guarde otra persona.</string>
     <key>PayloadIdentifier</key><string>com.sinapuestas.profile</string>
     <key>PayloadType</key><string>Configuration</string>
-    <key>PayloadUUID</key><string>E2A719BA-298C-4CFA-B5A4-B7B68FF2FBE3</string>
+    <key>PayloadUUID</key><string>61AF8107-842C-4B6F-8D64-48A430EF1259</string>
     <key>PayloadVersion</key><integer>1</integer>
     <key>PayloadRemovalDisallowed</key><true/>
 </dict>
