@@ -18,8 +18,8 @@
     --line: #D3DCD8;
     --teal: #0E7C6E;
     --teal-deep: #0A5248;
-    --dawn: #E7A16A;
-    --dawn-deep: #C97C42;
+    --dawn: #34D399;
+    --dawn-deep: #10B981;
     --card: #FFFFFF;
     --ring: rgba(14,124,110,.35);
     --shadow: 0 1px 2px rgba(12,27,25,.05), 0 8px 30px rgba(12,27,25,.07);
@@ -37,8 +37,8 @@
       --line: #1E332E;
       --teal: #34B3A0;
       --teal-deep: #7FD8C8;
-      --dawn: #F0B27E;
-      --dawn-deep: #E7A16A;
+      --dawn: #6EE7B7;
+      --dawn-deep: #34D399;
       --card: #10201D;
       --ring: rgba(52,179,160,.4);
       --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 34px rgba(0,0,0,.35);
@@ -47,13 +47,13 @@
   :root[data-theme="light"] {
     --paper: #EEF2EF; --paper-2: #E4EAE6; --ink: #0C1B19; --ink-soft: #16302C;
     --muted: #5A6B66; --line: #D3DCD8; --teal: #0E7C6E; --teal-deep: #0A5248;
-    --dawn: #E7A16A; --dawn-deep: #C97C42; --card: #FFFFFF; --ring: rgba(14,124,110,.35);
+    --dawn: #34D399; --dawn-deep: #10B981; --card: #FFFFFF; --ring: rgba(14,124,110,.35);
     --shadow: 0 1px 2px rgba(12,27,25,.05), 0 8px 30px rgba(12,27,25,.07);
   }
   :root[data-theme="dark"] {
     --paper: #0C1B19; --paper-2: #0A1614; --ink: #EAF1EE; --ink-soft: #D3E0DB;
     --muted: #90A39D; --line: #1E332E; --teal: #34B3A0; --teal-deep: #7FD8C8;
-    --dawn: #F0B27E; --dawn-deep: #E7A16A; --card: #10201D; --ring: rgba(52,179,160,.4);
+    --dawn: #6EE7B7; --dawn-deep: #34D399; --card: #10201D; --ring: rgba(52,179,160,.4);
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 34px rgba(0,0,0,.35);
   }
 
@@ -193,8 +193,10 @@
   /* Footer */
   footer { border-top: 1px solid var(--line); padding: 48px 0 60px; }
   .foot { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
-  .foot p { margin: 0; color: var(--muted); font-size: 14.5px; max-width: 52ch; }
+  .foot p { margin: 0; color: var(--muted); font-size: 14.5px; max-width: 46ch; }
   .foot .btn { padding: 11px 18px; }
+  .foot-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--ink); font-family: var(--sans); }
+  .foot-brand img { width: 34px; height: 34px; border-radius: 8px; display: block; }
 
   @media (max-width: 860px) {
     .hero-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -341,7 +343,11 @@
 
 <footer>
   <div class="wrap foot">
-    <p data-i18n="foot_p">Hecho para ayudar a la humanidad a dejar de apostar. Código abierto (licencia MIT): úsalo, cámbialo y compártelo con quien lo necesite. 💙</p>
+    <div class="foot-brand">
+      <img src="logo-small.png" alt="" width="34" height="34">
+      <span>SinApuestas</span>
+    </div>
+    <p data-i18n="foot_p">Hecho para ayudar a la humanidad a dejar de apostar. Código abierto (licencia MIT): úsalo, cámbialo y compártelo con quien lo necesite. 💚</p>
     <button class="btn btn-primary" id="shareBtn" data-i18n="foot_share">Compartir esto</button>
   </div>
 </footer>
@@ -383,7 +389,7 @@
       help1_t: "Autoexclusión", help1_p: "Pide por escrito el cierre de tu cuenta en cada casa de apuestas donde juegues.",
       help2_t: "Bloquea los pagos", help2_p: "Muchos bancos bloquean las transacciones de juego (código MCC 7995). Pregunta en el tuyo.",
       help3_t: "Habla con alguien", help3_p: "Jugadores Anónimos tiene grupos gratuitos en toda América Latina: jugadoresanonimos.org",
-      foot_p: "Hecho para ayudar a la humanidad a dejar de apostar. Código abierto (licencia MIT): úsalo, cámbialo y compártelo con quien lo necesite. 💙",
+      foot_p: "Hecho para ayudar a la humanidad a dejar de apostar. Código abierto (licencia MIT): úsalo, cámbialo y compártelo con quien lo necesite. 💚",
       foot_share: "Compartir esto"
     },
     en: {
@@ -421,7 +427,7 @@
       help1_t: "Self-exclusion", help1_p: "Ask in writing to close your account at every betting site you use.",
       help2_t: "Block the payments", help2_p: "Many banks block gambling transactions (MCC code 7995). Ask yours.",
       help3_t: "Talk to someone", help3_p: "Gamblers Anonymous has free groups worldwide: gamblersanonymous.org",
-      foot_p: "Made to help humanity quit gambling. Open source (MIT license): use it, change it, and share it with anyone who needs it. 💙",
+      foot_p: "Made to help humanity quit gambling. Open source (MIT license): use it, change it, and share it with anyone who needs it. 💚",
       foot_share: "Share this"
     },
     pt: {
@@ -459,7 +465,7 @@
       help1_t: "Autoexclusão", help1_p: "Peça por escrito o encerramento da sua conta em cada casa de apostas que você usa.",
       help2_t: "Bloqueie os pagamentos", help2_p: "Muitos bancos bloqueiam transações de jogo (código MCC 7995). Pergunte no seu.",
       help3_t: "Fale com alguém", help3_p: "Jogadores Anônimos tem grupos gratuitos no Brasil todo: jogadoresanonimos.org.br",
-      foot_p: "Feito para ajudar a humanidade a parar de apostar. Código aberto (licença MIT): use, mude e compartilhe com quem precisar. 💙",
+      foot_p: "Feito para ajudar a humanidade a parar de apostar. Código aberto (licença MIT): use, mude e compartilhe com quem precisar. 💚",
       foot_share: "Compartilhar"
     }
   };
