@@ -45,14 +45,15 @@ on askPassword(prompt)
 end askPassword
 
 on chooseDays()
-	set opts to {"7 días", "30 días", "90 días", "1 año"}
+	set opts to {"7 días", "30 días", "90 días", "1 año", "6 años"}
 	set c to choose from list opts with title "SinApuestas" with prompt "¿Por cuánto tiempo? Durante este tiempo NO se podrá quitar, pase lo que pase." default items {"30 días"} without empty selection allowed
 	if c is false then return -1
 	set v to item 1 of c
 	if v is "7 días" then return 7
 	if v is "30 días" then return 30
 	if v is "90 días" then return 90
-	return 365
+	if v is "1 año" then return 365
+	return 2190
 end chooseDays
 
 on doInstall()
