@@ -30,4 +30,12 @@ cp "$DIR/icon.icns" "$RES/applet.icns"
 /usr/libexec/PlistBuddy -c "Add :LSMinimumSystemVersion string 10.13" "$OUT/Contents/Info.plist" 2>/dev/null || true
 touch "$OUT"
 
+# IMPORTANTE: volver a firmar AL FINAL. osacompile firma la app, pero luego le
+# copiamos recursos (blocker.sh, ícono…) y eso ROMPE el sello. Sin re-firmar,
+# al descargarla de internet macOS la marca como "dañada / damaged". Re-firmamos
+# ad-hoc (sin cuenta de Apple) con todo ya adentro para que el sello sea válido.
+codesign --remove-signature "$OUT" 2>/dev/null || true
+codesign --force --deep --sign - "$OUT"
+codesign --verify --deep --strict "$OUT" && echo "Firma ad-hoc válida ✓"
+
 echo "Construida: $OUT"
