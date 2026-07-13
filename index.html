@@ -121,7 +121,7 @@
 
   /* Shield art */
   .shield-art { display: grid; place-items: center; }
-  .shield-art svg { width: min(100%, 320px); height: auto; filter: drop-shadow(0 18px 40px rgba(12,27,25,.18)); }
+  .shield-art svg, .shield-art img { width: min(100%, 300px); height: auto; border-radius: 22%; filter: drop-shadow(0 20px 44px rgba(12,27,25,.22)); }
 
   /* Sections */
   section { padding: 68px 0; border-top: 1px solid var(--line); }
@@ -245,16 +245,7 @@
           </div>
         </div>
         <div class="shield-art reveal d2" aria-hidden="true">
-          <svg viewBox="0 0 200 220" fill="none">
-            <defs>
-              <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="var(--teal)"/><stop offset="1" stop-color="var(--teal-deep)"/>
-              </linearGradient>
-            </defs>
-            <path d="M100 8L20 34v58c0 52 34 92 80 112 46-20 80-60 80-112V34L100 8z" fill="url(#g)"/>
-            <path d="M100 22L33 44v48c0 44 28 78 67 95 39-17 67-51 67-95V44L100 22z" fill="none" stroke="var(--dawn)" stroke-width="2" opacity=".5"/>
-            <path d="M66 108l24 24 46-52" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <img src="logo.png" alt="SinApuestas" width="640" height="640">
         </div>
       </div>
     </div>
