@@ -445,3 +445,7 @@ mrjack.bet.br
 playuzu.bet.br
 sortenabet.bet.br
 suprema.bet.br
+
+# --- Mercados de predicciones ---
+polymarket.com
+kalshi.com

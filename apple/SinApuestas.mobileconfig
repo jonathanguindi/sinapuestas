@@ -9,7 +9,7 @@
             <key>PayloadType</key><string>com.apple.webcontent-filter</string>
             <key>PayloadVersion</key><integer>1</integer>
             <key>PayloadIdentifier</key><string>com.sinapuestas.webfilter</string>
-            <key>PayloadUUID</key><string>D8A36687-120F-4988-8DE9-5A2A94104F4E</string>
+            <key>PayloadUUID</key><string>F9726AED-7365-472F-BC06-A8CCC5DD710D</string>
             <key>PayloadDisplayName</key><string>Filtro de apuestas</string>
             <key>FilterType</key><string>BuiltIn</string>
             <key>AutoFilterEnabled</key><true/>
@@ -839,6 +839,10 @@
                 <string>https://www.sortenabet.bet.br</string>
                 <string>https://suprema.bet.br</string>
                 <string>https://www.suprema.bet.br</string>
+                <string>https://polymarket.com</string>
+                <string>https://www.polymarket.com</string>
+                <string>https://kalshi.com</string>
+                <string>https://www.kalshi.com</string>
             </array>
         </dict>
     </array>
@@ -846,7 +850,7 @@
     <key>PayloadDescription</key><string>Bloquea los sitios de apuestas en Safari sin usar VPN. Para maxima proteccion, instalalo en un dispositivo supervisado o con un codigo de Tiempo en Pantalla que guarde otra persona.</string>
     <key>PayloadIdentifier</key><string>com.sinapuestas.profile</string>
     <key>PayloadType</key><string>Configuration</string>
-    <key>PayloadUUID</key><string>AC97658C-F613-4CAB-BBCE-63EC53BA6554</string>
+    <key>PayloadUUID</key><string>D65E35E9-B194-4447-BB36-428915AB53B8</string>
     <key>PayloadVersion</key><integer>1</integer>
     <key>PayloadRemovalDisallowed</key><true/>
 </dict>
