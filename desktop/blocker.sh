@@ -20,8 +20,32 @@ HOSTS="${SA_HOSTS:-/etc/hosts}"
 MARK_START="# >>> SinApuestas bloqueo (no editar) >>>"
 MARK_END="# <<< SinApuestas bloqueo <<<"
 CHECK_INTERVAL=3
+LIST_URL="${SA_LIST_URL:-https://sinapuestas.com/blocklists/domains.txt}"
+UPDATE_INTERVAL=21600   # revisar lista nueva cada 6 horas
 
 now() { date +%s; }
+
+# Descarga la lista más reciente y AGREGA los sitios nuevos (nunca quita).
+# Así el compromiso sigue firme y las casas nuevas llegan solas a todos.
+update_list() {
+  command -v curl >/dev/null 2>&1 || return
+  local tmp; tmp=$(mktemp) || return
+  if curl -fsS --max-time 25 "$LIST_URL" -o "$tmp" 2>/dev/null; then
+    # anti-corrupción: exige muchos dominios y un ancla conocida antes de tocar nada
+    local n; n=$(grep -cE '^[a-z0-9.-]+\.[a-z]{2,}$' "$tmp")
+    if [ "${n:-0}" -ge 100 ] && grep -qx 'bet365.com' "$tmp"; then
+      cat "$APP/extra_domains.txt" "$tmp" 2>/dev/null \
+        | sed 's/#.*//' | tr 'A-Z' 'a-z' | tr -d '[:blank:]' | sed 's/\.$//' \
+        | grep -v '^$' | sort -u > "$tmp.m"
+      if ! cmp -s "$tmp.m" "$APP/extra_domains.txt" 2>/dev/null; then
+        mv "$tmp.m" "$APP/extra_domains.txt"; chmod 644 "$APP/extra_domains.txt" 2>/dev/null
+        apply_block
+      fi
+      rm -f "$tmp.m"
+    fi
+  fi
+  rm -f "$tmp"
+}
 
 load_domains() {
   cat "$APP/domains.txt" "$APP/extra_domains.txt" 2>/dev/null \
@@ -112,9 +136,18 @@ cmd_apply() {
 }
 
 cmd_run() {
+  local last_update=0 t
+  load_state
+  [ "${PROTECTION_ON:-0}" = "1" ] && update_list   # actualizar al arrancar
+  last_update=$(now)
   while true; do
     load_state
     [ "${PROTECTION_ON:-0}" = "1" ] && apply_block
+    t=$(now)
+    if [ "${PROTECTION_ON:-0}" = "1" ] && [ $(( t - last_update )) -ge "$UPDATE_INTERVAL" ]; then
+      update_list
+      last_update=$t
+    fi
     sleep "$CHECK_INTERVAL"
   done
 }
@@ -172,6 +205,7 @@ cmd_stop() {
 }
 
 case "${1:-status}" in
+  update) update_list; echo "lista actualizada" ;;
   apply)  cmd_apply ;;
   run)    cmd_run ;;
   status) cmd_status ;;
