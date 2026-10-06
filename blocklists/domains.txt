@@ -449,3 +449,10 @@ suprema.bet.br
 # --- Mercados de predicciones ---
 polymarket.com
 kalshi.com
+
+# --- Vigía 2026-10-06 ---
+jogajunto.bet.br
+obabet.bet.br
+ice.bet.br
+latinbet24.com
+latamwin.com
