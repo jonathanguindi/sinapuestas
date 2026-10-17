@@ -699,3 +699,7 @@ lider.bet.br
 start.bet.br
 brasildasorte.bet.br
 betbra.bet.br
+
+# --- Vigía 2026-10-17 ---
+brasilbet.bet.br
+maximabet.bet.br
