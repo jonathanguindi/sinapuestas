@@ -749,3 +749,7 @@ sol.casino
 fairpari.com
 respincasino.com
 campeonbet.com
+
+# --- Vigía 2026-11-13 ---
+casinomarbella.es
+speedybet.es
