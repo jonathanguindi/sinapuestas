@@ -958,14 +958,3 @@ wptglobal.com
 wyns.com
 yaasscasino.es
 zamba.com.co
-
-# Binance y cripto (agregado a pedido para cortar el financiamiento de apuestas)
-binance.com
-accounts.binance.com
-p2p.binance.com
-www.binance.bh
-binance.us
-binance.bh
-binance.me
-binance.cc
-binance.info
