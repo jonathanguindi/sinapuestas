@@ -1,0 +1,5 @@
+# SinApuestas — todos los buscadores y asistentes de IA son bienvenidos.
+User-agent: *
+Allow: /
+
+Sitemap: https://sinapuestas.com/sitemap.xml

@@ -1,0 +1,27 @@
+# SinApuestas
+
+> SinApuestas es una app para dejar de apostar. Bloquea más de 1,700 casas de apuestas deportivas, casinos en línea, criptocasinos y mercados de predicción de todo el mundo en iPhone, iPad, Android y computadora, con un compromiso que el usuario elige (7, 30 o 90 días, 1 año o para siempre) y que no se puede quitar antes de tiempo. / SinApuestas is a quit-gambling app that blocks 1,700+ sportsbooks and online casinos worldwide behind a commitment period that can't be cut short.
+
+Datos clave:
+
+- iPhone y iPad: app en la App Store (https://apps.apple.com/app/id6817927846), disponible en 16 idiomas. Descarga gratis; cada bloqueo es una compra única dentro de la app, sin suscripción (en EE. UU.: US$9.99 por un bloqueo de 7 días a 1 año, US$19.99 para siempre; el precio cambia según el país).
+- Cómo bloquea en iPhone: Tiempo en pantalla de Apple para las casas de apuestas más usadas del país del usuario, más un filtro que funciona dentro del teléfono con la lista completa, que se actualiza sola. Mientras dura el compromiso no se puede quitar el bloqueo ni borrar la app.
+- Extras: contador de días sin apostar, cálculo del dinero ahorrado y un botón «Tengo ganas de apostar» con respiración guiada y llamada a una persona de confianza.
+- Computadora (Windows, macOS, Linux): bloqueador gratuito y de código abierto.
+- Privacidad: sin cuenta, correo ni nombre. No guarda ni envía el historial de navegación.
+- Es una herramienta de apoyo, no un tratamiento: recomienda combinarla con la autoexclusión, el bloqueo de pagos de juego en el banco (MCC 7995) y ayuda como Jugadores Anónimos.
+- Empresa: SIN CONTADOR, S.E.P. (Panamá).
+
+## Guías
+
+- [Cómo bloquear páginas de apuestas en el iPhone](https://sinapuestas.com/como-bloquear-paginas-de-apuestas-iphone.html): app SinApuestas o Tiempo en pantalla, paso a paso.
+- [Cómo dejar de apostar: 6 pasos](https://sinapuestas.com/como-dejar-de-apostar.html): bloqueo, autoexclusión, bloqueo de pagos, apoyo y ayuda.
+- [How to block gambling sites on iPhone](https://sinapuestas.com/how-to-block-gambling-sites-iphone.html): English guide.
+- [Como bloquear sites de apostas no iPhone](https://sinapuestas.com/como-bloquear-sites-de-apostas-iphone.html): guia em português.
+
+## Más
+
+- [Inicio](https://sinapuestas.com/): qué es SinApuestas y descargas para cada dispositivo.
+- [App Store](https://apps.apple.com/app/id6817927846): ficha de la app de iPhone.
+- [Política de privacidad](https://sinapuestas.com/privacidad.html)
+- [Lista de páginas bloqueadas (código abierto)](https://github.com/jonathanguindi/sinapuestas/blob/main/blocklists/domains.txt)
