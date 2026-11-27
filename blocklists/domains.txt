@@ -3041,3 +3041,8 @@ betcris.eu
 
 # --- Vigía 2026-11-27 ---
 21.com
+
+# --- Pedido de usuario 2026-11-27: T44 (casino de slots, Brasil) ---
+t44.com
+t44fun.com
+t44navi.com
